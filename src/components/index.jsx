@@ -1,0 +1,15 @@
+export {default as Navbar} from './navbar/Navbar';
+export {default as Hero} from './hero/Hero';
+export {default as Footer} from './footer/Footer';
+export {default as Contact} from './contact/Contact';
+export {default as Service} from './service/Service';
+export {default as Chatbot} from './chatbot/Chatbot';
+export {default as Testimonial} from './testimonial/Testimonial';
+export {default as Testimonials} from './testimonial/Testimonials';
+export {default as About} from './about/About';
+export {default as AboutHero} from './about/AboutHero';
+export {default as CTA} from './cta/CTA';
+export {default as FullCTA} from './cta/CTA_full';
+export {default as SmallCTA} from './cta/SmallCTA';
+export {default as Services} from './service/Services';
+export {default as Doctor} from './doctors/Doctor';
