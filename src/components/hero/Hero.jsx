@@ -1,7 +1,20 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaCalendarCheck } from "react-icons/fa";
 
+const words = ["Advanced", "Specialized", "Expert"];
+
 const Hero = () => {
+  const [wordIndex, setWordIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWordIndex((prevIndex) => (prevIndex + 1) % words.length);
+    }, 4000); // Change word every 4 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div>
       {/* Hero Section with Optimized Background Image */}
@@ -9,9 +22,9 @@ const Hero = () => {
         className="relative h-[80vh] md:h-screen bg-gray-100 flex items-center justify-center"
         style={{
           backgroundImage: "url('/nhn.png')",
-          backgroundSize: "40%", // Prevents zooming in too much
-          backgroundPosition: "top 60% right 10%", // Moves the image slightly to the right
-          backgroundRepeat: "no-repeat", // Ensures no tiling
+          backgroundSize: "40%",
+          backgroundPosition: "top 60% right 10%",
+          backgroundRepeat: "no-repeat",
         }}
       >
         {/* Overlay for Better Readability */}
@@ -23,10 +36,20 @@ const Hero = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
-            className="text-center md:text-left bg-white bg-opacity-95 p-8 rounded-xl shadow-lg max-w-3xl ml-[-30px]" // Moves text slightly to the left
+            className="text-center md:text-left bg-white bg-opacity-95 p-8 rounded-xl shadow-lg max-w-3xl ml-[-30px]"
           >
             <h1 className="text-4xl md:text-5xl font-bold text-blue-900 leading-tight">
-              Compassionate <span className="text-blue-600">Bone Marrow Care</span>
+              <motion.span
+                key={wordIndex}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 1.2, ease: "easeInOut" }} // Smooth transition
+                className="text-blue-600"
+              >
+                {words[wordIndex]}
+              </motion.span>{" "}
+              Bone Marrow Care
             </h1>
             <p className="mt-4 text-gray-700 text-lg">
               Providing life-saving treatments with cutting-edge technology and personalized patient care.
@@ -60,7 +83,7 @@ const Hero = () => {
         {[
           {
             title: "Our Mission",
-            text: "To offer the highest quality bone marrow treatments with compassion and innovation.",
+            text: "To offer the highest quality bone marrow treatments with precision and innovation.",
           },
           {
             title: "Our Vision",
@@ -68,7 +91,7 @@ const Hero = () => {
           },
           {
             title: "Our Values",
-            text: "Compassion, Excellence, Innovation, Integrity.",
+            text: "Excellence, Innovation, Integrity, Commitment.",
           },
         ].map((item, index) => (
           <motion.div
