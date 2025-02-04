@@ -3,3 +3,44 @@
 html{
     scroll-behavior: smooth;
 }
+
+/* Container to hold words */
+.words {
+  display: inline-block;
+  overflow: hidden;
+  height: 1em; /* Adjust based on font size */
+  vertical-align: bottom;
+  position: relative;
+}
+
+/* Create the scrolling effect */
+.words span {
+  display: block;
+  color: #1e40af; /* Dark blue */
+  font-weight: bold;
+  animation: word-change 10s infinite ease-in-out;
+}
+
+/* Keyframes for word rotation */
+@keyframes word-change {
+  0%, 20% { transform: translateY(-20%); } /* First word */
+  25%, 45% { transform: translateY(-120%); } /* Second word */
+  50%, 70% { transform: translateY(-220%); } /* Third word */
+  75%, 100% { transform: translateY(-330%); } /* Back to first word */
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.animate-rotation {
+  animation: rotation 8000ms infinite linear paused;
+}
+.hover\\:opacity-100:hover {
+  animation-play-state: running;
+}
+  

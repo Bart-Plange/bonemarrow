@@ -1,23 +1,13 @@
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaCalendarCheck } from "react-icons/fa";
+import { HeartPulse, Eye, ShieldCheck } from "lucide-react";
 
 const words = ["Advanced", "Specialized", "Expert"];
 
 const Hero = () => {
-  const [wordIndex, setWordIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setWordIndex((prevIndex) => (prevIndex + 1) % words.length);
-    }, 4000); // Change word every 4 seconds
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <div>
-      {/* Hero Section with Optimized Background Image */}
+      {/* Hero Section */}
       <section
         className="relative h-[80vh] md:h-screen bg-gray-100 flex items-center justify-center"
         style={{
@@ -27,7 +17,7 @@ const Hero = () => {
           backgroundRepeat: "no-repeat",
         }}
       >
-        {/* Overlay for Better Readability */}
+        {/* Overlay */}
         <div className="absolute inset-0 bg-opacity-40"></div>
 
         <div className="container mx-auto px-6 md:px-12 relative z-10">
@@ -39,16 +29,11 @@ const Hero = () => {
             className="text-center md:text-left bg-white bg-opacity-95 p-8 rounded-xl shadow-lg max-w-3xl ml-[-30px]"
           >
             <h1 className="text-4xl md:text-5xl font-bold text-blue-900 leading-tight">
-              <motion.span
-                key={wordIndex}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 1.2, ease: "easeInOut" }} // Smooth transition
-                className="text-blue-600"
-              >
-                {words[wordIndex]}
-              </motion.span>{" "}
+              <div className="words">
+                {words.map((word, index) => (
+                  <span key={index}>{word}</span>
+                ))}
+              </div>{" "}
               Bone Marrow Care
             </h1>
             <p className="mt-4 text-gray-700 text-lg">
@@ -84,26 +69,30 @@ const Hero = () => {
           {
             title: "Our Mission",
             text: "To offer the highest quality bone marrow treatments with precision and innovation.",
+            icon: <HeartPulse size={40} className="text-blue-700" />,
           },
           {
             title: "Our Vision",
             text: "To be a global leader in hematology and transplant care.",
+            icon: <Eye size={40} className="text-blue-700" />,
           },
           {
             title: "Our Values",
             text: "Excellence, Innovation, Integrity, Commitment.",
+            icon: <ShieldCheck size={40} className="text-blue-700" />,
           },
         ].map((item, index) => (
           <motion.div
             key={index}
-            className="bg-white p-6 rounded-xl shadow-md border border-gray-200"
+            className="relative p-6 rounded-xl shadow-md border border-gray-200 bg-white transition-all duration-300 hover:border-transparent hover:shadow-[0px_0px_10px_3px_rgba(255,34,136,0.6),_0px_0px_10px_3px_rgba(56,126,240,0.6)]"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.2 }}
             whileHover={{ scale: 1.05 }}
           >
-            <h3 className="text-xl font-semibold text-blue-700">{item.title}</h3>
-            <p className="text-gray-600 mt-2">{item.text}</p>
+            <div className="flex justify-center mb-3">{item.icon}</div>
+            <h3 className="text-xl font-semibold text-blue-700 text-center">{item.title}</h3>
+            <p className="text-gray-600 mt-2 text-center">{item.text}</p>
           </motion.div>
         ))}
       </div>
