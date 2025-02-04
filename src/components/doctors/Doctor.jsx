@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const doctors = [
   {
@@ -20,10 +21,11 @@ const doctors = [
 ];
 
 const Doctors = () => {
+  const [isPaused, setIsPaused] = useState(false);
+
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-white overflow-hidden">
       <div className="container mx-auto px-6 md:px-12 text-center">
-        {/* Section Title */}
         <motion.h2
           className="text-4xl font-bold text-blue-900 mb-6"
           initial={{ opacity: 0, y: -20 }}
@@ -36,33 +38,43 @@ const Doctors = () => {
           Our specialists are dedicated to providing world-class care in hematology and bone marrow health.
         </p>
 
-        {/* Doctors Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {doctors.map((doctor, index) => (
-            <motion.div
-              key={index}
-              className="bg-white p-6 rounded-xl shadow-md border border-gray-200 flex flex-col items-center text-center hover:shadow-lg transition-transform transform hover:scale-105"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-            >
-              <img
-                src={doctor.image}
-                alt={doctor.name}
-                className="w-24 h-24 rounded-full object-cover mb-4 border-2 border-blue-600"
-              />
-              <h3 className="text-xl font-semibold text-blue-800">{doctor.name}</h3>
-              <p className="text-gray-600 mt-2">{doctor.specialty}</p>
-              
-              {/* View Profile Button */}
-              <Link
-                to={`/doctors/${doctor.name.replace(/\s+/g, "-").toLowerCase()}`}
-                className="mt-4 text-blue-600 font-medium hover:underline"
+        {/* Animated Scrolling Doctors */}
+        <div 
+          className="relative w-full overflow-hidden"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <motion.div
+            className="flex space-x-8"
+            animate={isPaused ? {} : { x: [-1000, 0] }}
+            transition={{
+              repeat: Infinity,
+              repeatType: "loop",
+              duration: 15,
+              ease: "linear",
+            }}
+          >
+            {[...doctors, ...doctors].map((doctor, index) => (
+              <div
+                key={index}
+                className="bg-white p-6 rounded-xl shadow-md border border-gray-200 flex flex-col items-center text-center hover:shadow-lg transition-transform transform hover:scale-105 min-w-[300px]"
               >
-                View Profile
-              </Link>
-            </motion.div>
-          ))}
+                <img
+                  src={doctor.image}
+                  alt={doctor.name}
+                  className="w-24 h-24 rounded-full object-cover mb-4 border-2 border-blue-600"
+                />
+                <h3 className="text-xl font-semibold text-blue-800">{doctor.name}</h3>
+                <p className="text-gray-600 mt-2">{doctor.specialty}</p>
+                <Link
+                  to={`/doctors/${doctor.name.replace(/\s+/g, "-").toLowerCase()}`}
+                  className="mt-4 text-blue-600 font-medium hover:underline"
+                >
+                  View Profile
+                </Link>
+              </div>
+            ))}
+          </motion.div>
         </div>
 
         {/* See All Doctors Button */}
