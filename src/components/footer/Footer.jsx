@@ -42,9 +42,13 @@ const Footer = () => {
 
       </div>
 
-      {/* Copyright */}
+      {/* Copyright and Links */}
       <div className="text-center mt-10 text-gray-400">
-        &copy; {new Date().getFullYear()} Bone Marrow Care. All rights reserved.
+        <div>&copy; {new Date().getFullYear()} Bone Marrow Care. All rights reserved.</div>
+        <div className="mt-2">
+          <Link to="/terms" className="hover:text-blue-300">Terms and Conditions</Link> | 
+          <Link to="/privacy" className="hover:text-blue-300 ml-2">Privacy Policy</Link>
+        </div>
       </div>
     </footer>
   );

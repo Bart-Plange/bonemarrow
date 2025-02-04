@@ -13,3 +13,5 @@ export {default as FullCTA} from './cta/CTA_full';
 export {default as SmallCTA} from './cta/SmallCTA';
 export {default as Services} from './service/Services';
 export {default as Doctor} from './doctors/Doctor';
+export {default as PrivacyPolicy} from './policies/PrivacyPolicy';
+export {default as Terms} from './policies/Terms';
