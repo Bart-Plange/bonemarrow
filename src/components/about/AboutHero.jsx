@@ -1,75 +1,100 @@
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import Typewriter from "typewriter-effect";
 
 const AboutHero = () => {
+  const [scrollY, setScrollY] = useState(0);
+  const [showOverlay, setShowOverlay] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div className="relative overflow-hidden">
-      {/* Background Image with Gradient Overlay */}
-      <div className="absolute inset-0">
-        <img
-          src="/ab.png" 
-          alt="Hero Background"
-          className="w-full h-full object-contain"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-100 via-blue-500 to-blue-700 opacity-75"></div>
-      </div>
+    <div>
+      {/* About Hero Section */}
+      <section
+        className="relative h-[80vh] md:h-screen bg-gray-100 flex items-center justify-center"
+        style={{
+          backgroundImage: "url('/ab.png')",
+          backgroundSize: "40%",
+          backgroundPosition: "top 60% right 10%",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-opacity-40"></div>
 
-      {/* Hero Content */}
-      <div className="relative container mx-auto px-6 py-24 text-center">
-        <motion.h1
-          className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-6"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          Welcome to Our Bone Marrow Care Center
-        </motion.h1>
-        <motion.p
-          className="max-w-2xl mx-auto text-lg sm:text-xl text-gray-200 mb-10"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
-        >
-          Our dedicated team provides the highest level of care for bone marrow and blood disorder treatments.
-        </motion.p>
-        <motion.a
-          href="#"
-          className="inline-block bg-blue-800 hover:bg-blue-900 text-white py-3 px-8 rounded-full text-lg font-semibold shadow-lg transition transform hover:scale-105"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
-        >
-          Learn More About Us
-        </motion.a>
-      </div>
+        <div className="container mx-auto px-6 md:px-12 relative z-10">
+          {/* Hero Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1 }}
+            className="text-center md:text-left bg-white bg-opacity-95 p-8 rounded-xl shadow-lg max-w-3xl ml-[-30px]"
+          >
+            <h1 className="text-4xl md:text-5xl font-bold text-blue-900 leading-tight">
+              <motion.span
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+                className="text-blue-600"
+              >
+                <Typewriter
+                  options={{
+                    strings: ["Who We Are", "Our Mission", "About Us"],
+                    autoStart: true,
+                    loop: true,
+                  }}
+                />
+              </motion.span>
+            </h1>
+            <p className="mt-4 text-gray-700 text-lg">
+              Our dedicated team provides world-class care for bone marrow and blood disorder treatments.
+            </p>
+            <div className="mt-6 flex justify-center md:justify-start">
+              <a
+                href="#about"
+                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 rounded-lg shadow-md text-lg font-medium transition duration-300 transform hover:scale-105"
+              >
+                Learn More About Us
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
-      {/* Video Introduction Section */}
-      <div className="relative container mx-auto px-6 pb-24 mt-10">
-        <motion.p
-          className="text-center text-gray-300 text-lg mb-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.4 }}
-        >
-          Learn more about our mission and values from our leadership.
-        </motion.p>
+      {/* Video Section */}
+      <div className="relative flex justify-center items-center py-16 bg-gray-50">
         <motion.div
-          className="max-w-4xl mx-auto"
-          initial={{ opacity: 0, scale: 0.95 }}
+          className="w-full max-w-3xl rounded-lg overflow-hidden shadow-xl relative"
+          initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.6 }}
         >
-          <div className="relative w-full h-96 rounded-lg overflow-hidden shadow-2xl">
+          {/* Video Embed */}
+          <div className="relative pb-[56.25%]">
             <iframe
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ" // Replace with your actual video URL
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ" // Replace with actual video URL
               frameBorder="0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-              title="Hospital Introduction"
-              className="w-full h-full object-cover"
+              title="About Us Video"
+              className="absolute top-0 left-0 w-full h-full object-cover"
             ></iframe>
-            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40">
-              <button className="text-white text-lg font-semibold px-4 py-2 bg-blue-800 hover:bg-blue-900 rounded-full transition transform hover:scale-105">
-                Play Video
+            {/* Dynamic Video Overlay */}
+            <div
+              className={`absolute inset-0 flex items-center justify-center transition-opacity ${
+                showOverlay ? "bg-black bg-opacity-70" : "bg-black bg-opacity-40 hover:bg-opacity-50"
+              }`}
+              onMouseEnter={() => setShowOverlay(true)}
+              onMouseLeave={() => setShowOverlay(false)}
+            >
+              <button className="text-white text-lg font-semibold px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-full transition transform hover:scale-110">
+                ▶ Play Video
               </button>
             </div>
           </div>

@@ -18,13 +18,13 @@ const FullCTA = () => {
           Have Questions? Get Answers.
         </h2>
         <p className="mt-4 text-lg text-gray-200">
-          Explore our **FAQs and Educational Resources** to learn more about bone marrow health, procedures, and treatments.
+          Explore our Educational Resources and FAQs to learn more about bone marrow health, procedures, and treatments.
         </p>
 
         {/* CTA Buttons */}
         <div className="mt-8 flex flex-col md:flex-row gap-4 justify-center">
           <Link
-            to="/faq"
+            to="/resources#faqs"
             className="bg-white text-blue-900 px-6 py-3 rounded-lg font-semibold text-lg shadow-md hover:bg-gray-100 transition duration-300"
           >
             Visit FAQs

@@ -1,10 +1,20 @@
 import { motion } from "framer-motion";
 import { FaCalendarCheck } from "react-icons/fa";
 import { HeartPulse, Eye, ShieldCheck } from "lucide-react";
+import { useState, useEffect } from "react";
 
 const words = ["Advanced", "Specialized", "Expert"];
 
 const Hero = () => {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % words.length);
+    }, 2000); // Change word every 2 seconds
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div>
       {/* Hero Section */}
@@ -29,11 +39,16 @@ const Hero = () => {
             className="text-center md:text-left bg-white bg-opacity-95 p-8 rounded-xl shadow-lg max-w-3xl ml-[-30px]"
           >
             <h1 className="text-4xl md:text-5xl font-bold text-blue-900 leading-tight">
-              <div className="words">
-                {words.map((word, index) => (
-                  <span key={index}>{word}</span>
-                ))}
-              </div>{" "}
+              <motion.span
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+                className="text-blue-600"
+              >
+                {words[index]}
+              </motion.span>{" "}
               Bone Marrow Care
             </h1>
             <p className="mt-4 text-gray-700 text-lg">

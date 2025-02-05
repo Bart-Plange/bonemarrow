@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Calendar, Clock, Mail, User, Phone } from "lucide-react";
-import axios from "axios"; // Import Axios
+import { Calendar, Clock, Mail, User, Phone, MapPin } from "lucide-react";
+import axios from "axios";
+import { AppointmentHero } from "../components";
 
 const timeSlots = ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM"];
 
@@ -21,8 +22,8 @@ const Appointment = () => {
   const fetchUnavailableSlots = async (date) => {
     try {
       const response = await axios.get(`http://localhost:5000/api/appointments/list?date=${date}`);
-      const bookedTimes = response.data.map(app => app.time);
-      setAvailableTimes(timeSlots.filter(slot => !bookedTimes.includes(slot)));
+      const bookedTimes = response.data.map((app) => app.time);
+      setAvailableTimes(timeSlots.filter((slot) => !bookedTimes.includes(slot)));
     } catch (err) {
       console.error("Error fetching unavailable slots", err);
     }
@@ -56,7 +57,6 @@ const Appointment = () => {
       setConfirmation(response.data.message);
       setFormData({ name: "", email: "", phone: "", date: "", time: "" });
 
-      // Refresh available times after booking
       fetchUnavailableSlots(formData.date);
     } catch (error) {
       setErrorMessage(error.response?.data?.message || "Failed to book appointment.");
@@ -66,49 +66,72 @@ const Appointment = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <motion.h1 initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-3xl font-bold text-blue-900 text-center mb-6">
-        Book an Appointment
-      </motion.h1>
+    <div className="bg-gray-50">
+      <AppointmentHero />
 
-      <motion.form initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }} className="bg-white p-6 rounded-lg shadow-md w-full max-w-md" onSubmit={handleSubmit}>
-        <div className="mb-4 flex items-center border rounded-lg p-2">
-          <User className="text-gray-500 mr-2" />
-          <input type="text" name="name" placeholder="Full Name" className="w-full outline-none" required value={formData.name} onChange={handleChange} />
+      {/* Contact Information */}
+      <section className="py-12 px-6 text-center">
+        <h2 className="text-3xl font-semibold text-gray-800">Get in Touch</h2>
+        <div className="mt-6 flex flex-wrap justify-center gap-6">
+          <div className="flex items-center">
+            <Phone className="text-blue-600 mr-2" />
+            <p className="text-gray-700">+1 800-641-1234</p>
+          </div>
+          <div className="flex items-center">
+            <Mail className="text-blue-600 mr-2" />
+            <p className="text-gray-700">info@example.com</p>
+          </div>
+          <div className="flex items-center">
+            <MapPin className="text-blue-600 mr-2" />
+            <p className="text-gray-700">54 Berrick 2nd Street, Boston, MA</p>
+          </div>
         </div>
+      </section>
 
-        <div className="mb-4 flex items-center border rounded-lg p-2">
-          <Mail className="text-gray-500 mr-2" />
-          <input type="email" name="email" placeholder="Email Address" className="w-full outline-none" required value={formData.email} onChange={handleChange} />
-        </div>
+      {/* Appointment Form */}
+      <div id="appointment-form" className="flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8">
+        <motion.form
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg"
+          onSubmit={handleSubmit}
+        >
+          <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">Book an Appointment</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="relative">
+              <User className="absolute left-3 top-4 text-gray-500" />
+              <input type="text" name="name" placeholder="Full Name" required value={formData.name} onChange={handleChange} className="w-full pl-10 p-3 border rounded-md outline-none focus:ring-2 focus:ring-blue-600" />
+            </div>
+            <div className="relative">
+              <Mail className="absolute left-3 top-4 text-gray-500" />
+              <input type="email" name="email" placeholder="Email Address" required value={formData.email} onChange={handleChange} className="w-full pl-10 p-3 border rounded-md outline-none focus:ring-2 focus:ring-blue-600" />
+            </div>
+            <div className="relative">
+              <Phone className="absolute left-3 top-4 text-gray-500" />
+              <input type="tel" name="phone" placeholder="Phone Number" required value={formData.phone} onChange={handleChange} className="w-full pl-10 p-3 border rounded-md outline-none focus:ring-2 focus:ring-blue-600" />
+            </div>
+            <div className="relative">
+              <Calendar className="absolute left-3 top-4 text-gray-500" />
+              <input type="date" name="date" required value={formData.date} onChange={handleDateChange} className="w-full pl-10 p-3 border rounded-md outline-none focus:ring-2 focus:ring-blue-600" />
+            </div>
+          </div>
 
-        <div className="mb-4 flex items-center border rounded-lg p-2">
-          <Phone className="text-gray-500 mr-2" />
-          <input type="tel" name="phone" placeholder="Phone Number" className="w-full outline-none" required value={formData.phone} onChange={handleChange} />
-        </div>
+          <div className="mt-4">
+            <Clock className="absolute left-3 top-4 text-gray-500" />
+            <select name="time" required value={formData.time} onChange={handleChange} className="w-full pl-10 p-3 border rounded-md outline-none focus:ring-2 focus:ring-blue-600">
+              <option value="">Select Time Slot</option>
+              {availableTimes.map((slot, index) => (
+                <option key={index} value={slot}>{slot}</option>
+              ))}
+            </select>
+          </div>
 
-        <div className="mb-4 flex items-center border rounded-lg p-2">
-          <Calendar className="text-gray-500 mr-2" />
-          <input type="date" name="date" className="w-full outline-none" required value={formData.date} onChange={handleDateChange} />
-        </div>
-
-        <div className="mb-4 flex items-center border rounded-lg p-2">
-          <Clock className="text-gray-500 mr-2" />
-          <select name="time" required value={formData.time} onChange={handleChange}>
-            <option value="">Select Time Slot</option>
-            {availableTimes.map((slot, index) => (
-              <option key={index} value={slot}>{slot}</option>
-            ))}
-          </select>
-        </div>
-
-        {errorMessage && <p className="text-red-600">{errorMessage}</p>}
-        {confirmation && <p className="text-green-600">{confirmation}</p>}
-
-        <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition" disabled={loading}>
-          {loading ? "Booking..." : "Confirm Appointment"}
-        </button>
-      </motion.form>
+          <button type="submit" className="mt-6 w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition flex items-center justify-center">
+            {loading ? "Booking..." : "Confirm Appointment"}
+          </button>
+        </motion.form>
+      </div>
     </div>
   );
 };

@@ -2,6 +2,7 @@ export {default as Navbar} from './navbar/Navbar';
 export {default as Hero} from './hero/Hero';
 export {default as Footer} from './footer/Footer';
 export {default as Contact} from './contact/Contact';
+export {default as AppointmentHero} from './contact/AppointmentHero';
 export {default as Service} from './service/Service';
 export {default as Chatbot} from './chatbot/Chatbot';
 export {default as Testimonial} from './testimonial/Testimonial';
@@ -15,3 +16,5 @@ export {default as Services} from './service/Services';
 export {default as Doctor} from './doctors/Doctor';
 export {default as PrivacyPolicy} from './policies/PrivacyPolicy';
 export {default as Terms} from './policies/Terms';
+export {default as EducationalVideos} from './resources/EducationalVideos';
+
