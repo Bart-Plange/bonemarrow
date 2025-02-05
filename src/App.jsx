@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import {Home, NotFound, ChatDashboard, Appointment, Stories, AdminDashboard, AboutPage } from "./pages";
+import {Home, NotFound, ChatDashboard, Appointment, AdminDashboard, AboutPage } from "./pages";
 import {Navbar, Footer, Service, Contact, Chatbot, Terms, PrivacyPolicy} from "./components";
 import EducationalResources from "./pages/EducationalResources";
 
@@ -15,7 +15,6 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/resources" element={<EducationalResources />} />
         <Route path="/appointment" element={<Appointment />} />
-        <Route path="/stories" element={<Stories />} />
         <Route path="/adminDashboard" element={<AdminDashboard />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />

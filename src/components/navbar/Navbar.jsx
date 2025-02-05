@@ -72,13 +72,12 @@ const Navbar = () => {
           </div>
 
           <Link to="/resources" className="text-gray-900 hover:text-blue-500">Health Talks</Link>
-          <Link to="/stories" className="text-gray-900 hover:text-blue-500" onClick={toggleMenu}>News and Stories</Link>
           <Link to="/contact" className="text-gray-900 hover:text-blue-500">Contact</Link>
         </div>
 
         {/* Mobile Menu Button */}
         <div className="md:hidden">
-          <button onClick={toggleMenu} className="text-white text-2xl">
+          <button onClick={toggleMenu} className="text-blue-500 text-2xl">
             {menuOpen ? <FaTimes /> : <FaBars />}
           </button>
         </div>
@@ -108,7 +107,6 @@ const Navbar = () => {
             </div>
 
             <Link to="/resources" className="text-gray-700 hover:text-blue-500" onClick={toggleMenu}>Health Talks</Link>
-            <Link to="/stories" className="text-gray-700 hover:text-blue-500" onClick={toggleMenu}>News and Stories</Link>
             <Link to="/contact" className="text-gray-700 hover:text-blue-500" onClick={toggleMenu}>Contact</Link>
           </div>
         </div>

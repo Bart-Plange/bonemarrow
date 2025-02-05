@@ -8,34 +8,23 @@ const articles = [
   {
     title: "Understanding Bone Marrow Transplants",
     description: "An in-depth look at the process and benefits of bone marrow transplants.",
-    content: "A bone marrow transplant is a medical procedure where damaged bone marrow is replaced with healthy cells. This is often used for patients with leukemia, lymphoma, and other serious blood disorders..."
+    content: "A bone marrow transplant is a medical procedure where damaged bone marrow is replaced with healthy cells...",
   },
   {
     title: "Life After a Bone Marrow Transplant",
     description: "What to expect and how to manage your health post-transplant.",
-    content: "After a transplant, recovery can take months to a year. Patients need to monitor for complications, follow strict medication schedules, and maintain a healthy lifestyle..."
+    content: "After a transplant, recovery can take months to a year. Patients need to monitor for complications...",
   },
   {
     title: "Donating Bone Marrow: What You Need to Know",
     description: "A guide for potential donors on the donation process and its impact.",
-    content: "Donating bone marrow can save lives. The process involves matching with a recipient, undergoing a screening, and either providing peripheral blood stem cells or marrow directly..."
+    content: "Donating bone marrow can save lives. The process involves matching with a recipient...",
   },
 ];
 
-const faqs = [
-  { question: "What is a bone marrow transplant?", answer: "A bone marrow transplant replaces damaged or diseased bone marrow with healthy marrow from a donor or the patient's own cells." },
-  { question: "Who needs a bone marrow transplant?", answer: "Patients with leukemia, lymphoma, sickle cell anemia, and other blood disorders may require a transplant." },
-  { question: "How long does recovery take?", answer: "Recovery varies but can take several months to a year, depending on the patient's condition." },
-];
-
 const EducationalResources = () => {
-  const [expandedIndex, setExpandedIndex] = useState(null);
   const [selectedArticle, setSelectedArticle] = useState(null);
   const location = useLocation();
-
-  const toggleFAQ = (index) => {
-    setExpandedIndex(expandedIndex === index ? null : index);
-  };
 
   useEffect(() => {
     if (location.hash) {
@@ -62,42 +51,6 @@ const EducationalResources = () => {
         <p className="mt-4 text-lg md:text-xl max-w-2xl mx-auto">
           Learn more about bone marrow transplants, donations, and post-transplant care.
         </p>
-      </section>
-
-      {/* FAQs Section */}
-      <section id="faqs" className="py-16 px-6 md:px-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-blue-900">Frequently Asked Questions</h2>
-        <div className="max-w-3xl mx-auto mt-8 space-y-4">
-          {faqs.map((faq, index) => (
-            <motion.div
-              key={index}
-              className="border rounded-lg p-4 bg-white shadow-md cursor-pointer"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.5 }}
-              onClick={() => toggleFAQ(index)}
-            >
-              <div className="flex justify-between items-center w-full text-lg font-semibold">
-                {faq.question}
-                {expandedIndex === index ? <FaMinus className="text-blue-600" /> : <FaPlus className="text-blue-600" />}
-              </div>
-              <motion.p
-                initial={{ height: 0, opacity: 0 }}
-                animate={expandedIndex === index ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="mt-2 text-gray-700 overflow-hidden"
-              >
-                {faq.answer}
-              </motion.p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* Videos Section */}
-      <section className="py-16 bg-gray-50 px-6 md:px-12">
-        <EducationalVideos />
       </section>
 
       {/* Articles Section */}
@@ -142,10 +95,7 @@ const EducationalResources = () => {
               exit={{ scale: 0.8 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <button
-                onClick={() => setSelectedArticle(null)}
-                className="absolute top-4 right-4 text-gray-600 hover:text-gray-900"
-              >
+              <button onClick={() => setSelectedArticle(null)} className="absolute top-4 right-4">
                 <FaTimes size={20} />
               </button>
               <h2 className="text-2xl font-bold text-blue-900">{selectedArticle.title}</h2>
