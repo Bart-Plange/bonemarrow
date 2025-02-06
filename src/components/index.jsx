@@ -3,6 +3,7 @@ export {default as Hero} from './hero/Hero';
 export {default as Footer} from './footer/Footer';
 export {default as Contact} from './contact/Contact';
 export {default as AppointmentHero} from './contact/AppointmentHero';
+export {default as AppointmentCalendar} from './contact/AppointmentCalendar';
 export {default as Service} from './service/Service';
 export {default as Chatbot} from './chatbot/Chatbot';
 export {default as Testimonial} from './testimonial/Testimonial';

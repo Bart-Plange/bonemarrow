@@ -108,6 +108,7 @@ const Navbar = () => {
 
             <Link to="/resources" className="text-gray-700 hover:text-blue-500" onClick={toggleMenu}>Health Talks</Link>
             <Link to="/contact" className="text-gray-700 hover:text-blue-500" onClick={toggleMenu}>Contact</Link>
+            
           </div>
         </div>
       )}

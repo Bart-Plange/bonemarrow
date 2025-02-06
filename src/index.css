@@ -3,6 +3,18 @@
 html{
     scroll-behavior: smooth;
 }
+
+body {
+    background-color: #f9fafb; /* bg-gray-50 */
+    color: #111827; /* text-gray-900 */
+  }
+  
+  body .dark {
+    background-color: #111827; /* dark:bg-gray-900 */
+    color: #e5e7eb; /* dark:text-gray-200 */
+}
+
+
 /* 
 /* Container to hold words */
 /* .words {

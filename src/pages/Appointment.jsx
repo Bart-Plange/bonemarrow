@@ -1,10 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Calendar, Clock, Mail, User, Phone, MapPin } from "lucide-react";
 import axios from "axios";
 import { AppointmentHero } from "../components";
-
-const timeSlots = ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM"];
 
 const Appointment = () => {
   const [formData, setFormData] = useState({
@@ -14,31 +12,36 @@ const Appointment = () => {
     date: "",
     time: "",
   });
-  const [availableTimes, setAvailableTimes] = useState(timeSlots);
+
+  const [availableTimes, setAvailableTimes] = useState([]);
   const [confirmation, setConfirmation] = useState(null);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const fetchUnavailableSlots = async (date) => {
-    try {
-      const response = await axios.get(`http://localhost:5000/api/appointments/list?date=${date}`);
-      const bookedTimes = response.data.map((app) => app.time);
-      setAvailableTimes(timeSlots.filter((slot) => !bookedTimes.includes(slot)));
-    } catch (err) {
-      console.error("Error fetching unavailable slots", err);
+  const defaultSlots = ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM"];
+
+  // Fetch available time slots when date is selected
+  useEffect(() => {
+    if (formData.date) {
+      const fetchAvailableSlots = async () => {
+        try {
+          const response = await axios.get(`http://localhost:5000/api/appointments/available-slots/${formData.date}`);
+          setAvailableTimes(response.data.availableSlots.length ? response.data.availableSlots : defaultSlots);
+        } catch (error) {
+          console.error("❌ Error fetching available slots:", error);
+          setAvailableTimes(defaultSlots);
+        }
+      };
+      fetchAvailableSlots();
     }
-  };
+  }, [formData.date]);
 
-  const handleDateChange = (e) => {
-    const selectedDate = e.target.value;
-    setFormData({ ...formData, date: selectedDate });
-    fetchUnavailableSlots(selectedDate);
-  };
-
+  // Handle input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -47,7 +50,7 @@ const Appointment = () => {
 
     const today = new Date().toISOString().split("T")[0];
     if (formData.date < today) {
-      setErrorMessage("You cannot select a past date.");
+      setErrorMessage("❌ You cannot select a past date.");
       setLoading(false);
       return;
     }
@@ -56,10 +59,9 @@ const Appointment = () => {
       const response = await axios.post("http://localhost:5000/api/appointments/book", formData);
       setConfirmation(response.data.message);
       setFormData({ name: "", email: "", phone: "", date: "", time: "" });
-
-      fetchUnavailableSlots(formData.date);
+      setAvailableTimes(defaultSlots); // Reset available times
     } catch (error) {
-      setErrorMessage(error.response?.data?.message || "Failed to book appointment.");
+      setErrorMessage(error.response?.data?.message || "❌ Failed to book appointment.");
     }
 
     setLoading(false);
@@ -99,37 +101,52 @@ const Appointment = () => {
         >
           <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">Book an Appointment</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Name */}
             <div className="relative">
               <User className="absolute left-3 top-4 text-gray-500" />
               <input type="text" name="name" placeholder="Full Name" required value={formData.name} onChange={handleChange} className="w-full pl-10 p-3 border rounded-md outline-none focus:ring-2 focus:ring-blue-600" />
             </div>
+
+            {/* Email */}
             <div className="relative">
               <Mail className="absolute left-3 top-4 text-gray-500" />
               <input type="email" name="email" placeholder="Email Address" required value={formData.email} onChange={handleChange} className="w-full pl-10 p-3 border rounded-md outline-none focus:ring-2 focus:ring-blue-600" />
             </div>
+
+            {/* Phone */}
             <div className="relative">
               <Phone className="absolute left-3 top-4 text-gray-500" />
               <input type="tel" name="phone" placeholder="Phone Number" required value={formData.phone} onChange={handleChange} className="w-full pl-10 p-3 border rounded-md outline-none focus:ring-2 focus:ring-blue-600" />
             </div>
+
+            {/* Select Date */}
             <div className="relative">
               <Calendar className="absolute left-3 top-4 text-gray-500" />
-              <input type="date" name="date" required value={formData.date} onChange={handleDateChange} className="w-full pl-10 p-3 border rounded-md outline-none focus:ring-2 focus:ring-blue-600" />
+              <input type="date" name="date" required value={formData.date} onChange={handleChange} className="w-full pl-10 p-3 border rounded-md outline-none focus:ring-2 focus:ring-blue-600" />
             </div>
-          </div>
 
-          <div className="mt-4">
-            <Clock className="absolute left-3 top-4 text-gray-500" />
-            <select name="time" required value={formData.time} onChange={handleChange} className="w-full pl-10 p-3 border rounded-md outline-none focus:ring-2 focus:ring-blue-600">
-              <option value="">Select Time Slot</option>
-              {availableTimes.map((slot, index) => (
-                <option key={index} value={slot}>{slot}</option>
-              ))}
-            </select>
+            {/* Select Time */}
+            <div className="relative">
+              <Clock className="absolute left-3 top-4 text-gray-500" />
+              <select name="time" required value={formData.time} onChange={handleChange} className="w-full pl-10 p-3 border rounded-md outline-none focus:ring-2 focus:ring-blue-600">
+                <option value="">Select Time Slot</option>
+                {availableTimes.length > 0 ? (
+                  availableTimes.map((slot, index) => (
+                    <option key={index} value={slot}>{slot}</option>
+                  ))
+                ) : (
+                  <option disabled>No available slots</option>
+                )}
+              </select>
+            </div>
           </div>
 
           <button type="submit" className="mt-6 w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition flex items-center justify-center">
             {loading ? "Booking..." : "Confirm Appointment"}
           </button>
+
+          {errorMessage && <p className="text-red-600 mt-2 text-center">{errorMessage}</p>}
+          {confirmation && <p className="text-green-600 mt-2 text-center">{confirmation}</p>}
         </motion.form>
       </div>
     </div>

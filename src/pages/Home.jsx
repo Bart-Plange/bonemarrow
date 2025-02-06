@@ -6,8 +6,8 @@ const Home = () => {
       <Hero />
       <CTA />
       <Services />
-      <Testimonials />
       <Doctor />
+      <Testimonials />
       <FullCTA />
       <SmallCTA />
     </div>

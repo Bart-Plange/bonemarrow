@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {Home, NotFound, ChatDashboard, Appointment, AdminDashboard, AboutPage } from "./pages";
 import {Navbar, Footer, Service, Contact, Chatbot, Terms, PrivacyPolicy} from "./components";
 import EducationalResources from "./pages/EducationalResources";
+import ThemeToggle from "./components/ThemeToggle";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Chatbot />
+      <ThemeToggle />
       <Footer />
     </Router>
   );

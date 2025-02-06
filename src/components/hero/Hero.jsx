@@ -45,7 +45,7 @@ const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5 }}
-                className="text-blue-600"
+                className="text-blue-600 "
               >
                 {words[index]}
               </motion.span>{" "}
@@ -68,7 +68,7 @@ const Hero = () => {
         {/* Floating "Book Now" Button */}
         <motion.a
           href="/appointment"
-          className="fixed bottom-20 right-6 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300"
+          className="fixed z-index-50 bottom-32 right-6 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           whileHover={{ scale: 1.1, y: -3 }}
@@ -78,38 +78,42 @@ const Hero = () => {
         </motion.a>
       </section>
 
-      {/* Mission, Vision, Values Section */}
-      <div className="my-12 max-w-5xl mx-auto grid md:grid-cols-3 gap-8 px-6">
-        {[
-          {
-            title: "Our Mission",
-            text: "To offer the highest quality bone marrow treatments with precision and innovation.",
-            icon: <HeartPulse size={40} className="text-blue-700" />,
-          },
-          {
-            title: "Our Vision",
-            text: "To be a global leader in hematology and transplant care.",
-            icon: <Eye size={40} className="text-blue-700" />,
-          },
-          {
-            title: "Our Values",
-            text: "Excellence, Innovation, Integrity, Commitment.",
-            icon: <ShieldCheck size={40} className="text-blue-700" />,
-          },
-        ].map((item, index) => (
-          <motion.div
-            key={index}
-            className="relative p-6 rounded-xl shadow-md border border-gray-200 bg-white transition-all duration-300 hover:border-transparent hover:shadow-[0px_0px_10px_3px_rgba(255,34,136,0.6),_0px_0px_10px_3px_rgba(56,126,240,0.6)]"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.2 }}
-            whileHover={{ scale: 1.05 }}
-          >
-            <div className="flex justify-center mb-3">{item.icon}</div>
-            <h3 className="text-xl font-semibold text-blue-700 text-center">{item.title}</h3>
-            <p className="text-gray-600 mt-2 text-center">{item.text}</p>
-          </motion.div>
-        ))}
+      {/* Overlapping Cards */}
+      <div className="relative -mt-20 px-6 md:px-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {[
+            {
+              title: "Our Mission",
+              text: "To offer the highest quality bone marrow treatments with precision and innovation.",
+              icon: <HeartPulse size={40} className="text-white" />,
+              bgColor: "bg-blue-900",
+            },
+            {
+              title: "Our Vision",
+              text: "To be a global leader in hematology and transplant care.",
+              icon: <Eye size={40} className="text-white" />,
+              bgColor: "bg-purple-900",
+            },
+            {
+              title: "Our Values",
+              text: "Excellence, Innovation, Integrity, Commitment.",
+              icon: <ShieldCheck size={40} className="text-white" />,
+              bgColor: "bg-green-900",
+            },
+          ].map((item, index) => (
+            <motion.div
+              key={index}
+              className={`relative p-6 rounded-xl shadow-lg text-white ${item.bgColor} transition-all duration-300 transform hover:scale-105`}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+            >
+              <div className="flex justify-center mb-3">{item.icon}</div>
+              <h3 className="text-xl font-semibold text-center">{item.title}</h3>
+              <p className="mt-2 text-center">{item.text}</p>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   );
