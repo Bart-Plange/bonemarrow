@@ -3,7 +3,6 @@ export {default as Hero} from './hero/Hero';
 export {default as Footer} from './footer/Footer';
 export {default as Contact} from './contact/Contact';
 export {default as AppointmentHero} from './contact/AppointmentHero';
-export {default as AppointmentCalendar} from './contact/AppointmentCalendar';
 export {default as Service} from './service/Service';
 export {default as Chatbot} from './chatbot/Chatbot';
 export {default as Testimonial} from './testimonial/Testimonial';
@@ -18,4 +17,9 @@ export {default as Doctor} from './doctors/Doctor';
 export {default as PrivacyPolicy} from './policies/PrivacyPolicy';
 export {default as Terms} from './policies/Terms';
 export {default as EducationalVideos} from './resources/EducationalVideos';
+export {default as ProtectedRoute} from './users/ProtectedRoute';
 
+export {default as Settings} from './user_dashboard/Settings';
+export {default as Appoints} from './user_dashboard/Appoints';
+export {default as Messages} from './user_dashboard/Messages';
+export {default as Recent} from './user_dashboard/Recent';

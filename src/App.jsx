@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import {Home, NotFound, ChatDashboard, Appointment, AdminDashboard, AboutPage } from "./pages";
-import {Navbar, Footer, Service, Contact, Chatbot, Terms, PrivacyPolicy} from "./components";
+import {Home, NotFound, ChatDashboard, Appointment, AdminDashboard, AboutPage, Dashboard } from "./pages";
+import {Navbar, Footer, Service, Contact, Chatbot, Terms, PrivacyPolicy, ProtectedRoute} from "./components";
 import EducationalResources from "./pages/EducationalResources";
 import ThemeToggle from "./components/ThemeToggle";
 
@@ -19,7 +19,13 @@ function App() {
         <Route path="/adminDashboard" element={<AdminDashboard />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="*" element={<NotFound />} />
+      
+        {/* ✅ Admin-Only Routes */}
+        <Route element={<ProtectedRoute adminOnly={true} />}>
+                    <Route path="/admin-dashboard" element={<AdminDashboard />} />
+                </Route>
       </Routes>
       <Chatbot />
       <ThemeToggle />
