@@ -16,7 +16,7 @@ const Chatbot = () => {
   }, [messages]);
 
   const sendMessage = async () => {
-    if (!userMessage.trim()) return; // Prevent empty messages
+    if (!userMessage.trim()) return;
 
     const newMessages = [...messages, { type: "user", text: userMessage }];
     setMessages(newMessages);
@@ -24,17 +24,20 @@ const Chatbot = () => {
     setIsTyping(true);
 
     try {
-      const response = await axios.post("http://localhost:5000/api/chatbot/query", {
-        userMessage,
-      });
+        const response = await axios.post("http://localhost:5000/api/chatbot/query", {
+            userId: "65a1b9d2e4b0e78a2f3c8a9f",  // 🔹 Ensure userId is included
+            userMessage,
+        });
 
-      setMessages([...newMessages, { type: "bot", text: response.data.botResponse }]);
+        setMessages([...newMessages, { type: "bot", text: response.data.botResponse }]);
     } catch (error) {
-      setMessages([...newMessages, { type: "bot", text: "❌ Error: Unable to fetch response." }]);
+        console.error("Chatbot API Error:", error.response?.data || error.message);
+        setMessages([...newMessages, { type: "bot", text: "❌ Error: Unable to fetch response." }]);
     }
 
     setIsTyping(false);
-  };
+};
+
 
   // Clear Chat History
   const clearChatHistory = () => {
