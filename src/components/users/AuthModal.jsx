@@ -3,6 +3,15 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
+const backgroundAnimation = {
+  hidden: { opacity: 0, scale: 0.5 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 5, repeat: Infinity, repeatType: "reverse" },
+  },
+};
+
 const AuthModal = ({ isOpen, onClose }) => {
   const [isRegister, setIsRegister] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", password: "", isAdmin: false });
@@ -20,12 +29,7 @@ const AuthModal = ({ isOpen, onClose }) => {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        // ✅ Redirect based on role
-        if (response.data.isAdmin) {
-          navigate("/admin-dashboard");
-        } else {
-          navigate("/dashboard");
-        }
+        response.data.isAdmin ? navigate("/admin-dashboard") : navigate("/dashboard");
       } catch (err) {
         console.error("Error fetching profile:", err);
       }
@@ -38,22 +42,22 @@ const AuthModal = ({ isOpen, onClose }) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-  
+
     try {
       const url = isRegister
         ? "http://localhost:5000/api/auth/register"
         : "http://localhost:5000/api/auth/login";
-  
+
       const response = await axios.post(url, formData);
-  
+
       if (isRegister) {
         alert("Registration successful! Please check your email to verify your account.");
         return;
       }
-  
+
       localStorage.setItem("token", response.data.token);
       response.data.isAdmin ? navigate("/admin-dashboard") : navigate("/dashboard");
-  
+
       onClose();
     } catch (err) {
       setError(err.response?.data?.message || "An error occurred");
@@ -61,12 +65,40 @@ const AuthModal = ({ isOpen, onClose }) => {
       setLoading(false);
     }
   };
-  
+
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-10 backdrop-blur-md">
-      <motion.div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+    <div className="fixed inset-0 flex items-center justify-center z-50">
+      {/* Animated Background */}
+      <motion.div
+        className="absolute inset-0 bg-blue-900 flex overflow-hidden"
+        initial="hidden"
+        animate="visible"
+      >
+        {/* Floating Circles */}
+        {[...Array(5)].map((_, index) => (
+          <motion.div
+            key={index}
+            className="absolute bg-blue-500 opacity-30 rounded-full"
+            variants={backgroundAnimation}
+            style={{
+              width: `${80 + index * 40}px`,
+              height: `${80 + index * 40}px`,
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+            }}
+          />
+        ))}
+      </motion.div>
+
+      {/* Modal Content */}
+      <motion.div
+        className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md relative z-10"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <h2 className="text-3xl font-bold text-blue-700 text-center mb-2">
           {isRegister ? "Join Us! 🎉" : "Welcome Back! 👋"}
         </h2>

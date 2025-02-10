@@ -4,6 +4,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaTimes } from "react-icons/fa";
 import { FAQS } from "../components";
 
+const backgroundAnimation = {
+  hidden: { opacity: 0, scale: 0.5 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 6, repeat: Infinity, repeatType: "reverse" },
+  },
+};
+
 const articles = [
   {
     title: "Understanding Bone Marrow Transplants",
@@ -157,7 +166,7 @@ const EducationalResources = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-4xl md:text-6xl font-bold"
+          className="text-4xl md:text-6xl font-bold mt-5"
         >
           Educational Resources
         </motion.h1>
@@ -168,9 +177,7 @@ const EducationalResources = () => {
 
       {/* Articles Section */}
       <section className="py-16 px-6 md:px-12">
-        <h2 className="text-4xl font-bold text-center text-blue-900 mb-8">
-          Latest Articles
-        </h2>
+        <h2 className="text-4xl font-bold text-center text-blue-900 mb-8">Latest Articles</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {articles.map((article, index) => (
             <motion.div
@@ -180,12 +187,8 @@ const EducationalResources = () => {
               transition={{ duration: 0.5, delay: index * 0.2 }}
               className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col"
             >
-              <h3 className="text-xl font-semibold text-blue-900 mb-2">
-                {article.title}
-              </h3>
-              <p className="text-gray-700 mb-4 line-clamp-3">
-                {article.description}
-              </p>
+              <h3 className="text-xl font-semibold text-blue-900 mb-2">{article.title}</h3>
+              <p className="text-gray-700 mb-4 line-clamp-3">{article.description}</p>
               <div className="mt-auto">
                 <button
                   onClick={() => setSelectedArticle(article)}
@@ -203,31 +206,42 @@ const EducationalResources = () => {
       <AnimatePresence>
         {selectedArticle && (
           <motion.div
-            className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center px-4 z-50"
+            className="fixed inset-0 flex justify-center items-center px-4 z-50"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedArticle(null)}
           >
+            {/* Animated Background */}
+            <motion.div className="absolute inset-0 bg-blue-900 flex overflow-hidden" initial="hidden" animate="visible">
+              {[...Array(5)].map((_, index) => (
+                <motion.div
+                  key={index}
+                  className="absolute bg-blue-500 opacity-30 rounded-full"
+                  variants={backgroundAnimation}
+                  style={{
+                    width: `${60 + index * 30}px`,
+                    height: `${60 + index * 30}px`,
+                    top: `${Math.random() * 100}%`,
+                    left: `${Math.random() * 100}%`,
+                  }}
+                />
+              ))}
+            </motion.div>
+
+            {/* Modal Content */}
             <motion.div
-              className="bg-white rounded-lg p-8 max-w-3xl w-full max-h-[80vh] overflow-y-auto relative"
+              className="bg-white rounded-lg p-8 max-w-3xl w-full max-h-[80vh] overflow-y-auto relative z-10"
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.8 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <button
-                onClick={() => setSelectedArticle(null)}
-                className="absolute top-4 right-4 text-gray-600 hover:text-gray-800"
-              >
+              <button onClick={() => setSelectedArticle(null)} className="absolute top-4 right-4 text-gray-600 hover:text-gray-800">
                 <FaTimes size={20} />
               </button>
-              <h2 className="text-2xl font-bold text-blue-900 mb-4">
-                {selectedArticle.title}
-              </h2>
-              <div className="text-gray-700 whitespace-pre-wrap leading-relaxed text-base">
-                {selectedArticle.content}
-              </div>
+              <h2 className="text-2xl font-bold text-blue-900 mb-4">{selectedArticle.title}</h2>
+              <div className="text-gray-700 whitespace-pre-wrap leading-relaxed text-base">{selectedArticle.content}</div>
             </motion.div>
           </motion.div>
         )}
