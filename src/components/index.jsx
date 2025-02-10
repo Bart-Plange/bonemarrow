@@ -18,8 +18,9 @@ export {default as PrivacyPolicy} from './policies/PrivacyPolicy';
 export {default as Terms} from './policies/Terms';
 export {default as EducationalVideos} from './resources/EducationalVideos';
 export {default as ProtectedRoute} from './users/ProtectedRoute';
-
+export {default as FAQS} from './faqs/FAQS';
 export {default as Settings} from './user_dashboard/Settings';
 export {default as Appoints} from './user_dashboard/Appoints';
 export {default as Messages} from './user_dashboard/Messages';
 export {default as Recent} from './user_dashboard/Recent';
+

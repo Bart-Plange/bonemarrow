@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Calendar, Clock, Mail, User, Phone, MapPin } from "lucide-react";
+import { Calendar, Clock, Mail, User, Phone, MapPin, MessageCircle } from "lucide-react";
 import axios from "axios";
 import { AppointmentHero } from "../components";
 
@@ -11,6 +11,7 @@ const Appointment = () => {
     phone: "",
     date: "",
     time: "",
+    message: "", // ✅ Added message field
   });
 
   const [availableTimes, setAvailableTimes] = useState([]);
@@ -58,8 +59,8 @@ const Appointment = () => {
     try {
       const response = await axios.post("http://localhost:5000/api/appointments/book", formData);
       setConfirmation(response.data.message);
-      setFormData({ name: "", email: "", phone: "", date: "", time: "" });
-      setAvailableTimes(defaultSlots); // Reset available times
+      setFormData({ name: "", email: "", phone: "", date: "", time: "", message: "" });
+      setAvailableTimes(defaultSlots);
     } catch (error) {
       setErrorMessage(error.response?.data?.message || "❌ Failed to book appointment.");
     }
@@ -71,26 +72,43 @@ const Appointment = () => {
     <div className="bg-gray-50">
       <AppointmentHero />
 
-      {/* Contact Information */}
+      {/* 📌 Contact Information as Cards */}
       <section className="py-12 px-6 text-center">
-        <h2 className="text-3xl font-semibold text-gray-800">Get in Touch</h2>
-        <div className="mt-6 flex flex-wrap justify-center gap-6">
-          <div className="flex items-center">
-            <Phone className="text-blue-600 mr-2" />
-            <p className="text-gray-700">+1 800-641-1234</p>
-          </div>
-          <div className="flex items-center">
-            <Mail className="text-blue-600 mr-2" />
-            <p className="text-gray-700">info@example.com</p>
-          </div>
-          <div className="flex items-center">
-            <MapPin className="text-blue-600 mr-2" />
-            <p className="text-gray-700">54 Berrick 2nd Street, Boston, MA</p>
-          </div>
+        <h2 className="text-3xl font-semibold text-gray-800 mb-6">Get in Touch</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {[
+            {
+              icon: <Phone size={32} className="text-blue-600" />,
+              title: "Call Us",
+              text: "+1 800-641-1234",
+            },
+            {
+              icon: <Mail size={32} className="text-blue-600" />,
+              title: "Email Us",
+              text: "info@example.com",
+            },
+            {
+              icon: <MapPin size={32} className="text-blue-600" />,
+              title: "Visit Us",
+              text: "54 Berrick 2nd Street, Boston, MA",
+            },
+          ].map((item, index) => (
+            <motion.div
+              key={index}
+              className="bg-white p-6 rounded-xl shadow-lg flex flex-col items-center text-center transition-transform transform hover:scale-105"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+            >
+              {item.icon}
+              <h3 className="text-lg font-semibold mt-2">{item.title}</h3>
+              <p className="text-gray-600 mt-1">{item.text}</p>
+            </motion.div>
+          ))}
         </div>
       </section>
 
-      {/* Appointment Form */}
+      {/* 📌 Appointment Form */}
       <div id="appointment-form" className="flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8">
         <motion.form
           initial={{ opacity: 0, scale: 0.95 }}
@@ -126,7 +144,7 @@ const Appointment = () => {
             </div>
 
             {/* Select Time */}
-            <div className="relative">
+            <div className="relative col-span-1 sm:col-span-2">
               <Clock className="absolute left-3 top-4 text-gray-500" />
               <select name="time" required value={formData.time} onChange={handleChange} className="w-full pl-10 p-3 border rounded-md outline-none focus:ring-2 focus:ring-blue-600">
                 <option value="">Select Time Slot</option>
@@ -139,9 +157,21 @@ const Appointment = () => {
                 )}
               </select>
             </div>
+
+            {/* Additional Message */}
+            <div className="relative col-span-1 sm:col-span-2">
+              <MessageCircle className="absolute left-3 top-4 text-gray-500" />
+              <textarea
+                name="message"
+                placeholder="Additional Message (Optional)"
+                value={formData.message}
+                onChange={handleChange}
+                className="w-full pl-10 p-3 border rounded-md outline-none focus:ring-2 focus:ring-blue-600 resize-none h-24"
+              />
+            </div>
           </div>
 
-          <button type="submit" className="mt-6 w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition flex items-center justify-center">
+          <button type="submit" className="mt-6 w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition">
             {loading ? "Booking..." : "Confirm Appointment"}
           </button>
 

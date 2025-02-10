@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaTimes } from "react-icons/fa";
+import { FAQS } from "../components";
 
 const articles = [
   {
@@ -231,6 +232,8 @@ const EducationalResources = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <FAQS />
     </div>
   );
 };
