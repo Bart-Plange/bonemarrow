@@ -19,13 +19,14 @@ const AuthModal = ({ isOpen, onClose }) => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem("token");
         if (!token) return;
 
-        const response = await axios.get("http://localhost:5000/api/auth/profile", {
+        const response = await axios.get(`${backendUrl}/api/auth/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -45,8 +46,8 @@ const AuthModal = ({ isOpen, onClose }) => {
 
     try {
       const url = isRegister
-        ? "http://localhost:5000/api/auth/register"
-        : "http://localhost:5000/api/auth/login";
+        ? `${backendUrl}/api/auth/register`
+        : `${backendUrl}/api/auth/login`;
 
       const response = await axios.post(url, formData);
 

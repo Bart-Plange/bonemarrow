@@ -8,6 +8,8 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -18,7 +20,7 @@ const Contact = () => {
     setResponseMessage("");
 
     try {
-      await axios.post("http://localhost:5000/api/contact/submit", formData);
+      await axios.post(`${backendUrl}/api/contact/submit`, formData);
       setResponseMessage("✅ Message sent successfully! We'll get back to you soon.");
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {

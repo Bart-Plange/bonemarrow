@@ -21,12 +21,13 @@ const Appointment = () => {
 
   const defaultSlots = ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM"];
 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   // Fetch available time slots when date is selected
   useEffect(() => {
     if (formData.date) {
       const fetchAvailableSlots = async () => {
         try {
-          const response = await axios.get(`http://localhost:5000/api/appointments/available-slots/${formData.date}`);
+          const response = await axios.get(`${backendUrl}/api/appointments/available-slots/${formData.date}`);
           setAvailableTimes(response.data.availableSlots.length ? response.data.availableSlots : defaultSlots);
         } catch (error) {
           console.error("❌ Error fetching available slots:", error);
@@ -57,7 +58,7 @@ const Appointment = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/api/appointments/book", formData);
+      const response = await axios.post(`${backendUrl}/api/appointments/book`, formData);
       setConfirmation(response.data.message);
       setFormData({ name: "", email: "", phone: "", date: "", time: "", message: "" });
       setAvailableTimes(defaultSlots);

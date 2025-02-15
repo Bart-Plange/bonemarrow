@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {Home, NotFound, ChatDashboard, Appointment, AdminDashboard, AboutPage, Dashboard } from "./pages";
-import {Navbar, Footer, Service, Contact, Chatbot, Terms, PrivacyPolicy, ProtectedRoute} from "./components";
+import {Navbar, Footer, Service, Contact, Chatbot, Terms, PrivacyPolicy, ProtectedRoute, BubbleEffect} from "./components";
 import EducationalResources from "./pages/EducationalResources";
 import ThemeToggle from "./components/ThemeToggle";
 
@@ -8,6 +8,7 @@ function App() {
   return (
     <Router>
       <Navbar />
+      <BubbleEffect />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/chatdashboard" element={<ChatDashboard />} />

@@ -8,6 +8,8 @@ const AssignDoctor = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   useEffect(() => {
     fetchAppointments();
     fetchDoctors();
@@ -16,7 +18,7 @@ const AssignDoctor = () => {
   // ✅ Fetch Appointments (Only Unassigned)
   const fetchAppointments = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/appointments/list?status=Pending");
+      const response = await axios.get(`${backendUrl}/api/appointments/list?status=Pending`);
       setAppointments(response.data.appointments);
     } catch (err) {
       setError("❌ Failed to load appointments.");
@@ -26,7 +28,7 @@ const AssignDoctor = () => {
   // ✅ Fetch Doctors
   const fetchDoctors = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/doctors");
+      const response = await axios.get(`${backendUrl}/api/doctors`);
       setDoctors(response.data);
     } catch (err) {
       setError("❌ Failed to load doctors.");
@@ -38,7 +40,7 @@ const AssignDoctor = () => {
     if (!doctorId) return;
 
     try {
-      await axios.patch(`http://localhost:5000/api/appointments/assign/${appointmentId}`, { doctorId });
+      await axios.patch(`${backendUrl}/api/appointments/assign/${appointmentId}`, { doctorId });
       setSuccess("✅ Doctor assigned successfully!");
       fetchAppointments(); // Refresh appointment list
     } catch (err) {

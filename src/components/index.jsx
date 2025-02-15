@@ -23,4 +23,6 @@ export {default as Settings} from './user_dashboard/Settings';
 export {default as Appoints} from './user_dashboard/Appoints';
 export {default as Messages} from './user_dashboard/Messages';
 export {default as Recent} from './user_dashboard/Recent';
+export {default as BubbleEffect} from './mouse/BubbleEffect';    
+
 

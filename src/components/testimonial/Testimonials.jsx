@@ -27,17 +27,21 @@ const Testimonials = () => {
   const [isPaused, setIsPaused] = useState(false);
 
   return (
-    <section className="py-16 bg-blue-50 overflow-hidden">
-      <div className="container mx-auto px-6 md:px-12 text-center">
+    <section className="py-16 overflow-hidden relative">
+      {/* 🔴 Subtle Animated Red Bubble in the Background */}
+      
+
+      <div className="container mx-auto px-6 md:px-12 text-center relative z-10">
+        {/* Section Heading */}
         <motion.h2
-          className="text-4xl font-bold text-blue-900 mb-6"
+          className="text-4xl font-bold bg-gradient-to-r from-red-700 to-red-500 text-transparent bg-clip-text mb-6"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           What Our Patients Say
         </motion.h2>
-        <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-12">
+        <p className="text-gray-700 text-lg max-w-2xl mx-auto mb-12">
           Hear from patients who have experienced our compassionate care and expertise.
         </p>
 
@@ -60,18 +64,20 @@ const Testimonials = () => {
             {[...testimonials, ...testimonials].map((testimonial, index) => (
               <div
                 key={index}
-                className="bg-white p-6 rounded-xl shadow-md border border-gray-200 flex flex-col items-center text-center hover:shadow-lg transition-transform transform hover:scale-105 min-w-[300px]"
+                className="bg-white p-6 rounded-xl shadow-md border border-red-300 flex flex-col items-center text-center hover:shadow-xl transition-transform transform hover:scale-105 min-w-[300px]"
               >
                 <img
                   src={testimonial.image}
                   alt={testimonial.name}
-                  className="w-20 h-20 rounded-full object-cover mb-4 border-2 border-blue-600"
+                  className="w-20 h-20 rounded-full object-cover mb-4 border-2 border-red-600"
                 />
-                <h3 className="text-xl font-semibold text-blue-800">{testimonial.name}</h3>
-                <p className="text-gray-600 mt-2">{testimonial.review}</p>
+                <h3 className="text-xl font-semibold text-red-800">{testimonial.name}</h3>
+                {/* 🔴 Short Red Underline */}
+                <div className="w-10 h-1 bg-red-600 mx-auto my-2"></div>
+                <p className="text-gray-700 mt-2">{testimonial.review}</p>
                 <div className="flex mt-3">
                   {Array.from({ length: testimonial.rating }).map((_, i) => (
-                    <FaStar key={i} className="text-yellow-500 text-lg" />
+                    <FaStar key={i} className="text-red-500 text-lg" />
                   ))}
                 </div>
               </div>

@@ -10,6 +10,7 @@ const Chatbot = () => {
   const [showModal, setShowModal] = useState(false);
   const messagesEndRef = useRef(null);
 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   // Scroll chat to the latest message
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -24,7 +25,7 @@ const Chatbot = () => {
     setIsTyping(true);
 
     try {
-        const response = await axios.post("http://localhost:5000/api/chatbot/query", {
+        const response = await axios.post(`${backendUrl}/api/chatbot/query`, {
             userId: "65a1b9d2e4b0e78a2f3c8a9f",  // 🔹 Ensure userId is included
             userMessage,
         });

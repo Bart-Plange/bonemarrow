@@ -9,13 +9,15 @@ const AdminDashboard = () => {
   const [error, setError] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   useEffect(() => {
     fetchAppointments();
   }, []);
 
   const fetchAppointments = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/appointments/list");
+      const response = await axios.get(`${backendUrl}/api/appointments/list`);
       setAppointments(response.data.appointments || []);
     } catch (err) {
       setError("❌ Failed to load appointments.");
@@ -25,7 +27,7 @@ const AdminDashboard = () => {
 
   const handleCancel = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/appointments/cancel/${id}`);
+      await axios.delete(`${backendUrl}/api/appointments/cancel/${id}`);
       setAppointments(appointments.filter((app) => app._id !== id));
     } catch (err) {
       setError("❌ Failed to cancel appointment.");
@@ -34,7 +36,7 @@ const AdminDashboard = () => {
 
   const handleApprove = async (id) => {
     try {
-      await axios.patch(`http://localhost:5000/api/appointments/approve/${id}`);
+      await axios.patch(`${backendUrl}/api/appointments/approve/${id}`);
       setAppointments(
         appointments.map((app) =>
           app._id === id ? { ...app, status: "Confirmed" } : app
