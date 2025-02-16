@@ -161,7 +161,7 @@ const EducationalResources = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-blue-900 text-white text-center py-20 px-6 md:px-12">
+      <section className="relative bg-red-900 text-white text-center py-20 px-6 md:px-12">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -177,7 +177,7 @@ const EducationalResources = () => {
 
       {/* Articles Section */}
       <section className="py-16 px-6 md:px-12">
-        <h2 className="text-4xl font-bold text-center text-blue-900 mb-8">Latest Articles</h2>
+        <h2 className="text-4xl font-bold text-center text-red-900 mb-8">Latest Articles</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {articles.map((article, index) => (
             <motion.div
@@ -187,12 +187,12 @@ const EducationalResources = () => {
               transition={{ duration: 0.5, delay: index * 0.2 }}
               className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col"
             >
-              <h3 className="text-xl font-semibold text-blue-900 mb-2">{article.title}</h3>
+              <h3 className="text-xl font-semibold text-red-900 mb-2">{article.title}</h3>
               <p className="text-gray-700 mb-4 line-clamp-3">{article.description}</p>
               <div className="mt-auto">
                 <button
                   onClick={() => setSelectedArticle(article)}
-                  className="text-blue-600 font-semibold hover:underline"
+                  className="text-red-600 font-semibold hover:underline"
                 >
                   Read More →
                 </button>
@@ -213,11 +213,11 @@ const EducationalResources = () => {
             onClick={() => setSelectedArticle(null)}
           >
             {/* Animated Background */}
-            <motion.div className="absolute inset-0 bg-blue-900 flex overflow-hidden" initial="hidden" animate="visible">
+            <motion.div className="absolute inset-0 bg-red-900 flex overflow-hidden" initial="hidden" animate="visible">
               {[...Array(5)].map((_, index) => (
                 <motion.div
                   key={index}
-                  className="absolute bg-blue-500 opacity-30 rounded-full"
+                  className="absolute bg-red-500 opacity-30 rounded-full"
                   variants={backgroundAnimation}
                   style={{
                     width: `${60 + index * 30}px`,
@@ -240,7 +240,7 @@ const EducationalResources = () => {
               <button onClick={() => setSelectedArticle(null)} className="absolute top-4 right-4 text-gray-600 hover:text-gray-800">
                 <FaTimes size={20} />
               </button>
-              <h2 className="text-2xl font-bold text-blue-900 mb-4">{selectedArticle.title}</h2>
+              <h2 className="text-2xl font-bold text-red-900 mb-4">{selectedArticle.title}</h2>
               <div className="text-gray-700 whitespace-pre-wrap leading-relaxed text-base">{selectedArticle.content}</div>
             </motion.div>
           </motion.div>

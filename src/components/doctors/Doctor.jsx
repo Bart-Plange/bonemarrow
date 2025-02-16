@@ -12,7 +12,7 @@ const Doctors = () => {
   const [isPaused, setIsPaused] = useState(false);
 
   return (
-    <section className="py-16 overflow-hidden">
+    <section className="py-16 overflow-hidden bg-gray-50">
       <div className="container mx-auto px-6 md:px-12 text-center">
         {/* Section Heading */}
         <motion.h2

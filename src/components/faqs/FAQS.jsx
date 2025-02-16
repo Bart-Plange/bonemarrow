@@ -3,12 +3,12 @@ import { motion } from "framer-motion";
 import { Search, ChevronDown, ChevronUp, Info, ShieldCheck, CheckCircle, AlertTriangle } from "lucide-react";
 
 const faqs = [
-    // 🔵 General Questions
+    // 🔴 General Questions
     {
       question: "What is a bone marrow transplant, and why might I need one?",
       answer:
         "A bone marrow transplant replaces damaged or diseased bone marrow with healthy stem cells. It is often required for patients with leukemia, lymphoma, aplastic anemia, or other blood disorders.",
-      icon: <Info size={20} className="text-blue-500" />,
+      icon: <Info size={20} className="text-red-500" />,
     },
     {
       question: "How do I know if I'm eligible for a bone marrow transplant?",
@@ -17,7 +17,7 @@ const faqs = [
       icon: <CheckCircle size={20} className="text-green-500" />,
     },
     
-    // 🧬 Donor & Matching
+    // 🩸 Donor & Matching
     {
       question: "What are the types of bone marrow transplants?",
       answer:
@@ -28,7 +28,7 @@ const faqs = [
       question: "How is a bone marrow donor selected?",
       answer:
         "For allogeneic transplants, we find a matching donor from the national registry or a close family member. A closer match reduces complications.",
-      icon: <Info size={20} className="text-blue-500" />,
+      icon: <Info size={20} className="text-red-500" />,
     },
     {
       question: "Can I be my own bone marrow donor?",
@@ -42,7 +42,7 @@ const faqs = [
       question: "What is the recovery process like?",
       answer:
         "Recovery takes 3-6 months for your immune system to rebuild. Full recovery may take up to a year, depending on your response to the transplant.",
-      icon: <Info size={20} className="text-blue-500" />,
+      icon: <Info size={20} className="text-red-500" />,
     },
     {
       question: "Are there side effects after a transplant?",
@@ -83,15 +83,15 @@ const BoneMarrowFAQ = () => {
   );
 
   return (
-    <section className="py-16 bg-gradient-to-r from-blue-50 to-blue-100 px-6">
+    <section className="py-16 bg-gradient-to-r from-red-50 to-red-100 px-6">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
         className="max-w-3xl mx-auto text-center"
       >
-        <h2 className="text-4xl font-bold text-blue-900">Bone Marrow Transplant FAQs</h2>
-        <p className="text-gray-600 mt-4">Learn more about the transplant process, donor selection, and recovery.</p>
+        <h2 className="text-4xl font-bold text-red-900">Bone Marrow Transplant FAQs</h2>
+        <p className="text-gray-700 mt-4">Learn more about the transplant process, donor selection, and recovery.</p>
 
         {/* Search Bar */}
         <div className="relative mt-6">
@@ -101,7 +101,7 @@ const BoneMarrowFAQ = () => {
             placeholder="Search FAQs..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
           />
         </div>
       </motion.div>
@@ -112,13 +112,13 @@ const BoneMarrowFAQ = () => {
           filteredFAQs.map((faq, index) => (
             <motion.div
               key={index}
-              className="bg-white shadow-md rounded-lg overflow-hidden border-l-4 border-blue-600"
+              className="bg-white shadow-md rounded-lg overflow-hidden border-l-4 border-red-600"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
             >
               <button
-                className="flex justify-between items-center w-full px-6 py-4 text-left text-lg font-medium text-blue-700 focus:outline-none"
+                className="flex justify-between items-center w-full px-6 py-4 text-left text-lg font-medium text-red-700 focus:outline-none"
                 onClick={() => toggleFAQ(index)}
               >
                 <span className="flex items-center gap-3">
@@ -151,7 +151,7 @@ const BoneMarrowFAQ = () => {
       >
         <a
           href="/appointment"
-          className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md text-lg font-medium transition duration-300 transform hover:scale-105 hover:bg-blue-700"
+          className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-3 rounded-lg shadow-md text-lg font-medium transition duration-300 transform hover:scale-105 hover:from-red-700 hover:to-red-800"
         >
           Schedule a Consultation
         </a>

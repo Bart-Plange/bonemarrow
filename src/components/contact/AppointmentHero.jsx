@@ -11,12 +11,12 @@ const AppointmentHero = () => {
         transition={{ duration: 1 }}
         className="text-center md:text-left bg-white bg-opacity-95 p-8 rounded-xl shadow-lg max-w-3xl mx-auto md:ml-0"
       >
-        <h1 className="text-4xl md:text-5xl font-bold text-blue-900 leading-tight">
+        <h1 className="text-4xl md:text-5xl font-bold text-red-900 leading-tight">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-blue-600"
+            className="text-red-600"
           >
             <Typewriter
               options={{
@@ -27,13 +27,13 @@ const AppointmentHero = () => {
             />
           </motion.span>
         </h1>
-        <p className="mt-4 text-gray-700 text-lg">
+        <p className="mt-4 text-red-700 text-lg">
           Secure your spot with our specialists for world-class medical consultation.
         </p>
         <div className="mt-6 flex justify-center md:justify-start">
           <a
             href="#appointment-form"
-            className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 rounded-lg shadow-md text-lg font-medium transition duration-300 transform hover:scale-105"
+            className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-6 py-3 rounded-lg shadow-md text-lg font-medium transition duration-300 transform hover:scale-105"
           >
             Book Now
           </a>

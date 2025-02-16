@@ -16,30 +16,22 @@ const AboutHero = () => {
           transition={{ duration: 1 }}
           className="text-center md:text-left bg-white bg-opacity-95 p-8 rounded-xl shadow-lg max-w-3xl mx-auto md:ml-0"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-blue-900 leading-tight">
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
-              className="text-blue-600"
-            >
-              <Typewriter
-                options={{
-                  strings: ["Who We Are", "Our Mission", "About Us"],
-                  autoStart: true,
-                  loop: true,
-                }}
-              />
-            </motion.span>
+          <h1 className="text-4xl md:text-5xl font-bold leading-tight bg-gradient-to-r from-red-700 to-red-500 text-transparent bg-clip-text">
+            <Typewriter
+              options={{
+                strings: ["Who We Are", "Our Mission", "About Us"],
+                autoStart: true,
+                loop: true,
+              }}
+            />
           </h1>
-          <p className="mt-4 text-gray-700 text-lg">
+          <p className="mt-4 text-lg bg-gradient-to-r from-gray-900 to-gray-700 text-transparent bg-clip-text">
             Our dedicated team provides world-class care for bone marrow and blood disorder treatments.
           </p>
           <div className="mt-6 flex justify-center md:justify-start">
             <a
               href="#about"
-              className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 rounded-lg shadow-md text-lg font-medium transition duration-300 transform hover:scale-105"
+              className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-6 py-3 rounded-lg shadow-md text-lg font-medium transition duration-300 transform hover:scale-105"
             >
               Learn More About Us
             </a>
@@ -72,7 +64,7 @@ const AboutHero = () => {
           {/* Video Embed */}
           <div className="relative pb-[56.25%]">
             <iframe
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ" // Replace with actual video URL
+              src="https://www.youtube.com/embed/REPLACE_WITH_ACTUAL_VIDEO_URL" // Replace with actual video URL
               frameBorder="0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
@@ -87,7 +79,7 @@ const AboutHero = () => {
               onMouseEnter={() => setShowOverlay(true)}
               onMouseLeave={() => setShowOverlay(false)}
             >
-              <button className="text-white text-lg font-semibold px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-full transition transform hover:scale-110">
+              <button className="text-white text-lg font-semibold px-6 py-3 bg-red-600 hover:bg-red-700 rounded-full transition transform hover:scale-110">
                 ▶ Play Video
               </button>
             </div>
