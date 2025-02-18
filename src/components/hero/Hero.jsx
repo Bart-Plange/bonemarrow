@@ -6,20 +6,6 @@ import Typewriter from "typewriter-effect";
 const Hero = () => {
   return (
     <div className="relative overflow-hidden">
-      {/* ✅ Floating Bubble (Top Right) */}
-      <motion.div
-        className="absolute top-[750px] left-[10px] w-[100px] h-[100px] md:w-[100px] md:h-[100px] bg-red-500 bg-opacity-25 rounded-full blur-3xl z-50"
-        animate={{
-          y: [0, 20, 0], // Floating animation (up & down)
-          scale: [1, 1.1, 1], // Slight pulsating effect
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          repeatType: "reverse",
-          ease: "easeInOut",
-        }}
-      />
 
       {/* Hero Section */}
       <section className="relative bg-gray-100 flex flex-col md:flex-row items-center justify-between h-auto md:h-screen px-6 md:px-12 z-10">
@@ -29,7 +15,7 @@ const Hero = () => {
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
-          className="text-center md:text-left p-6 md:p-10 flex-1"
+          className="text-center md:text-left p-6 mt-24 mt-0 md:p-10 flex-1"
         >
           <h1 className="text-4xl md:text-5xl font-bold leading-tight bg-gradient-to-r from-red-700 to-red-500 text-transparent bg-clip-text">
             <Typewriter

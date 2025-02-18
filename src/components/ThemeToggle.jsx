@@ -30,7 +30,7 @@ const ThemeToggle = ({ user }) => {
       {/* Floating Settings Icon */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-18 right-6 bg-blue-600 dark:bg-gray-700 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 dark:hover:bg-gray-600 transition"
+        className="fixed bottom-18 right-6 bg-red-500 dark:bg-red-600 text-white p-3 rounded-full shadow-lg hover:bg-red-700 dark:hover:bg-gray-600 transition"
       >
         <Settings size={28} />
       </button>

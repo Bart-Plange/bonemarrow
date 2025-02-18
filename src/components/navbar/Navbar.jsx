@@ -41,14 +41,14 @@ const Navbar = () => {
   return (
     <nav
       className={`${
-        isScrolled ? "backdrop-blur-md bg-opacity-90 bg-red-700" : "bg-white"
+        isScrolled ? "backdrop-blur-md bg-opacity-90 bg-red-200" : "bg-white"
       } shadow-md fixed top-5 w-full z-50 transition-all duration-300`}
     >
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
         <Link to="/" className="text-2xl font-bold flex items-center text-red-700">
           <img src="/logo.jpeg" alt="logo" className="w-12"/>
-          <p className="ml-2">Ghana Stem Cell</p>
+          <p className="ml-2">BMT Ghana Stem Cells Unit</p>
         </Link>
 
         {/* Desktop Menu */}
