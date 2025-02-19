@@ -8,7 +8,7 @@ const AboutHero = () => {
   return (
     <div>
       {/* About Hero Section */}
-      <section className="relative bg-gray-100 flex flex-col-reverse md:grid md:grid-cols-2 md:items-center h-auto md:h-screen px-6 md:px-12">
+      <section className="relative bg-gray-100 flex flex-col-reverse md:grid md:grid-cols-2 md:items-center h-auto md:h-[80vh] px-6 md:px-12 py-12 md:py-0">
         {/* Hero Text */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -25,7 +25,7 @@ const AboutHero = () => {
               }}
             />
           </h1>
-          <p className="mt-4 text-lg bg-gradient-to-r from-gray-900 to-gray-700 text-transparent bg-clip-text">
+          <p className="mt-4 text-lg text-gray-700">
             Our dedicated team provides world-class care for bone marrow and blood disorder treatments.
           </p>
           <div className="mt-6 flex justify-center md:justify-start">
@@ -43,12 +43,13 @@ const AboutHero = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
-          className="flex justify-center"
+          className="flex justify-center items-center mt-8 md:mt-0"
+          id="about"
         >
           <img
-            src="/ab.png"
+            src="/ab.png" // Replace with your image path
             alt="About Us"
-            className="w-full md:w-[500px] h-auto object-contain"
+            className="w-full max-w-[400px] h-auto object-contain rounded-lg shadow-lg"
           />
         </motion.div>
       </section>
@@ -56,7 +57,7 @@ const AboutHero = () => {
       {/* Video Section */}
       <div className="relative flex justify-center items-center py-16 bg-gray-50">
         <motion.div
-          className="w-full max-w-3xl rounded-lg overflow-hidden shadow-xl relative"
+          className="w-full max-w-4xl rounded-lg overflow-hidden shadow-xl relative"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.6 }}

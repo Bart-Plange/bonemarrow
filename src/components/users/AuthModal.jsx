@@ -20,6 +20,7 @@ const AuthModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
 
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -52,7 +53,7 @@ const AuthModal = ({ isOpen, onClose }) => {
       const response = await axios.post(url, formData);
 
       if (isRegister) {
-        alert("Registration successful! Please check your email to verify your account.");
+        alert("🎉 Registration successful! Please check your email to verify your account.");
         return;
       }
 
@@ -61,7 +62,7 @@ const AuthModal = ({ isOpen, onClose }) => {
 
       onClose();
     } catch (err) {
-      setError(err.response?.data?.message || "An error occurred");
+      setError(err.response?.data?.message || "❌ An error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -71,17 +72,17 @@ const AuthModal = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
-      {/* Animated Background */}
+      {/* 🔥 Animated Red Background */}
       <motion.div
-        className="absolute inset-0 bg-blue-900 flex overflow-hidden"
+        className="absolute inset-0 bg-gradient-to-br from-red-800 to-red-600 flex overflow-hidden"
         initial="hidden"
         animate="visible"
       >
-        {/* Floating Circles */}
-        {[...Array(5)].map((_, index) => (
+        {/* 🎈 Floating Red Circles */}
+        {[...Array(6)].map((_, index) => (
           <motion.div
             key={index}
-            className="absolute bg-blue-500 opacity-30 rounded-full"
+            className="absolute bg-red-400 opacity-40 rounded-full blur-2xl"
             variants={backgroundAnimation}
             style={{
               width: `${80 + index * 40}px`,
@@ -93,14 +94,14 @@ const AuthModal = ({ isOpen, onClose }) => {
         ))}
       </motion.div>
 
-      {/* Modal Content */}
+      {/* 🔴 Modal Content */}
       <motion.div
         className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md relative z-10"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="text-3xl font-bold text-blue-700 text-center mb-2">
+        <h2 className="text-3xl font-bold text-red-700 text-center mb-4">
           {isRegister ? "Join Us! 🎉" : "Welcome Back! 👋"}
         </h2>
         <form onSubmit={handleSubmit}>
@@ -113,17 +114,17 @@ const AuthModal = ({ isOpen, onClose }) => {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   required
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500"
                 />
               </div>
-              <div className="mb-4">
-                <label className="block text-gray-700">Register as Admin?</label>
+              <div className="mb-4 flex items-center">
                 <input
                   type="checkbox"
                   checked={formData.isAdmin}
                   onChange={(e) => setFormData({ ...formData, isAdmin: e.target.checked })}
-                  className="ml-2"
+                  className="mr-2"
                 />
+                <label className="text-gray-700">Register as Admin?</label>
               </div>
             </>
           )}
@@ -134,7 +135,7 @@ const AuthModal = ({ isOpen, onClose }) => {
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               required
-              className="w-full p-2 border border-gray-300 rounded-md"
+              className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500"
             />
           </div>
           <div className="mb-4">
@@ -144,14 +145,14 @@ const AuthModal = ({ isOpen, onClose }) => {
               value={formData.password}
               onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               required
-              className="w-full p-2 border border-gray-300 rounded-md"
+              className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500"
             />
           </div>
           <button
             type="submit"
             disabled={loading}
-            className={`w-full p-2 bg-blue-500 text-white rounded-md ${
-              loading ? "opacity-50" : "hover:bg-blue-600"
+            className={`w-full p-3 bg-red-600 text-white rounded-md ${
+              loading ? "opacity-50" : "hover:bg-red-700"
             } transition-all`}
           >
             {loading ? "Loading..." : isRegister ? "Register" : "Login"}
@@ -159,15 +160,15 @@ const AuthModal = ({ isOpen, onClose }) => {
           {error && <p className="text-red-500 mt-2">{error}</p>}
         </form>
 
-        {/* Toggle Between Login & Register */}
+        {/* 🔄 Toggle Between Login & Register */}
         <p className="text-gray-600 text-center mt-4">
           {isRegister ? "Already have an account?" : "Don't have an account?"}{" "}
-          <button onClick={() => setIsRegister(!isRegister)} className="text-blue-600 hover:underline">
+          <button onClick={() => setIsRegister(!isRegister)} className="text-red-600 hover:underline">
             {isRegister ? "Log in" : "Register now"}
           </button>
         </p>
 
-        {/* Close Button */}
+        {/* ❌ Close Button */}
         <button onClick={onClose} className="mt-4 text-gray-500 hover:text-gray-700 text-sm block mx-auto">
           Close
         </button>

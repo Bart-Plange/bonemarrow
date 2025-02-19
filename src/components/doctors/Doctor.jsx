@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import { useState } from "react";
+import { motion, useAnimation, useMotionValue } from "framer-motion";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const doctors = [
@@ -10,6 +10,28 @@ const doctors = [
 
 const Doctors = () => {
   const [isPaused, setIsPaused] = useState(false);
+  const controls = useAnimation();
+  const x = useMotionValue(0); // Tracks `x` position
+
+  useEffect(() => {
+    const animateScroll = async () => {
+      await controls.start({
+        x: ["0%", "-100%"],
+        transition: {
+          repeat: Infinity,
+          repeatType: "loop",
+          duration: 20,
+          ease: "linear",
+        },
+      });
+    };
+
+    if (!isPaused) {
+      animateScroll();
+    } else {
+      controls.stop(); // Pause animation (keeps `x` value)
+    }
+  }, [isPaused, controls]);
 
   return (
     <section className="py-16 overflow-hidden bg-gray-50">
@@ -28,20 +50,20 @@ const Doctors = () => {
         </p>
 
         {/* Animated Scrolling Doctors */}
-        <div 
+        <div
           className="relative w-full overflow-hidden"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
           <motion.div
-            className="flex space-x-8"
-            animate={isPaused ? {} : { x: ["-100%", "0%"] }}
-            transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+            className="flex space-x-8 w-max"
+            style={{ x }}
+            animate={controls}
           >
             {[...doctors, ...doctors].map((doctor, index) => (
-              <div 
-                key={index} 
-                className="bg-white p-6 rounded-xl shadow-md border border-red-200 flex flex-col items-center text-center min-w-[300px] hover:shadow-lg transition-transform transform hover:scale-105"
+              <div
+                key={index}
+                className="bg-white p-6 rounded-xl shadow-md flex flex-col items-center text-center min-w-[300px] hover:shadow-lg transition-transform transform hover:scale-105"
               >
                 <img
                   src={doctor.image}
