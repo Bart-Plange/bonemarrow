@@ -62,22 +62,36 @@ const Contact = () => {
             transition={{ duration: 1 }}
             className="bg-gray-50 p-6 rounded-lg shadow-md"
           >
-            <h3 className="text-xl font-semibold text-red-900">Get in Touch</h3>
-            <p className="text-gray-600 mt-2">Reach out to us through any of the following channels.</p>
-            <span className="w-full h-1 bg-red-500 flex text-xl my-2"></span>
-            <div className="mt-4 space-y-4">
-              <div className="flex items-center space-x-3">
-                <FaMapMarkerAlt className="text-red-600 text-xl" />
-                <span className="text-gray-700">123 Health St, New York, NY</span>
+            <h3 className="text-2xl font-semibold text-red-900">📍 Our Location</h3>
+            <div className="flex items-center mt-3">
+              <FaMapMarkerAlt className="text-red-600 text-2xl mr-3" />
+              <p className="text-gray-700 font-medium">Ridge Hospital, Castle Road, Accra - Ghana</p>
+            </div>
+
+            <h3 className="text-2xl font-semibold text-red-900 mt-6">📞 Contact Numbers</h3>
+            <div className="mt-3 space-y-2">
+              <div className="flex items-center">
+                <FaPhone className="text-red-600 text-2xl mr-3" />
+                <p className="text-gray-700 font-medium">+233 (0) 556 680 012</p>
               </div>
-              <div className="flex items-center space-x-3">
-                <FaPhone className="text-red-600 text-xl" />
-                <span className="text-gray-700">+1 (234) 567-890</span>
+              <div className="flex items-center">
+                <FaPhone className="text-red-600 text-2xl mr-3" />
+                <p className="text-gray-700 font-medium">+233 (0) 546 030 081</p>
               </div>
-              <div className="flex items-center space-x-3">
-                <FaEnvelope className="text-red-600 text-xl" />
-                <span className="text-gray-700">contact@bonemarrowcare.com</span>
+              <div className="flex items-center">
+                <FaPhone className="text-red-600 text-2xl mr-3" />
+                <p className="text-gray-700 font-medium">+233 (0) 205 627 325</p>
               </div>
+              <div className="flex items-center">
+                <FaPhone className="text-red-600 text-2xl mr-3" />
+                <p className="text-gray-700 font-medium">Office Line: +233 302 261 898</p>
+              </div>
+            </div>
+
+            <h3 className="text-2xl font-semibold text-red-900 mt-6">✉️ Email Address</h3>
+            <div className="flex items-center mt-3">
+              <FaEnvelope className="text-red-600 text-2xl mr-3" />
+              <p className="text-gray-700 font-medium">info@bmtstemcell.com</p>
             </div>
           </motion.div>
 
@@ -139,12 +153,12 @@ const Contact = () => {
           </motion.div>
         </div>
 
-        {/* Full-Width Google Map Beneath Contact Info & Form */}
+        {/* Full-Width Google Map */}
         <div className="mt-10">
           <iframe
             title="Google Map"
             className="w-full h-80 rounded-lg shadow-lg"
-            src="https://www.google.com/maps/embed/v1/123+Health+St,New+York,NY"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.0380937593764!2d-0.20125082555304574!3d5.561372494419091!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf9a76309f9c37%3A0xb450873ecf547576!2sGreater%20Accra%20Regional%20Hospital!5e0!3m2!1sen!2sgh!4v1740722068004!5m2!1sen!2sgh"
             allowFullScreen
           ></iframe>
         </div>
