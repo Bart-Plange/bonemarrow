@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import i18n from "../config/i18n"; // Your i18n setup
 import { ThemeContext } from "../context/ThemeContext";
-import i18n from "../config/i18n";
 
 const ThemeProvider = ({ children, user }) => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
@@ -17,7 +17,7 @@ const ThemeProvider = ({ children, user }) => {
           setTheme(theme);
           setFontSize(fontSize);
           setLanguage(language);
-          i18n.changeLanguage(language); // Ensure i18next updates UI globally
+          i18n.changeLanguage(language); // Update i18n language
         })
         .catch(err => console.error("Error fetching settings:", err));
     }
@@ -30,11 +30,11 @@ const ThemeProvider = ({ children, user }) => {
     }
   }, [theme, fontSize, language, user]);
 
-  // Function to change language (force app-wide update)
+  // Function to change language (no page reload needed)
   const changeLanguage = (lang) => {
     setLanguage(lang);
-    i18n.changeLanguage(lang); // Dynamically update language in i18next
-    localStorage.setItem("language", lang); // Store language in localStorage
+    i18n.changeLanguage(lang); // Dynamically update language
+    localStorage.setItem("language", lang);
   };
 
   // Function to change font size
