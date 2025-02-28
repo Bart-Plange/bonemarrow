@@ -26,13 +26,19 @@ const Footer = () => {
         <div>
           <h3 className="text-xl font-semibold">Quick Links</h3>
           <ul className="mt-2 space-y-2">
-            {["Home", "About", "Services", "Contact"].map((link, index) => (
+            {[
+              { name: "Home", path: "/" },
+              { name: "About", path: "/about" },
+              { name: "Services", path: "/services" },
+              { name: "Contact", path: "/contact" },
+            ].map((link, index) => (
               <li key={index}>
                 <Link
-                  to={`/${link.toLowerCase()}`}
+                  to={link.path}
                   className="hover:text-red-300 transition duration-300"
+                  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                 >
-                  {link}
+                  {link.name}
                 </Link>
               </li>
             ))}
@@ -47,10 +53,17 @@ const Footer = () => {
 
           {/* Social Icons */}
           <div className="flex space-x-4 mt-4">
-            {[FaFacebook, FaTwitter, FaInstagram, FaLinkedin].map((Icon, index) => (
+            {[
+              { Icon: FaFacebook, url: "https://facebook.com" },
+              { Icon: FaTwitter, url: "https://twitter.com" },
+              { Icon: FaInstagram, url: "https://instagram.com" },
+              { Icon: FaLinkedin, url: "https://linkedin.com" },
+            ].map(({ Icon, url }, index) => (
               <a
                 key={index}
-                href="#"
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-300 hover:text-red-300 text-2xl transition duration-300"
               >
                 <Icon />
@@ -64,11 +77,19 @@ const Footer = () => {
       <div className="text-center mt-10 text-gray-400">
         <div>&copy; {new Date().getFullYear()} Bone Marrow Care. All rights reserved.</div>
         <div className="mt-2">
-          <Link to="/terms" className="hover:text-red-300 transition duration-300">
+          <Link
+            to="/terms"
+            className="hover:text-red-300 transition duration-300"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
             Terms and Conditions
           </Link>{" "}
           |{" "}
-          <Link to="/privacy" className="hover:text-red-300 transition duration-300 ml-2">
+          <Link
+            to="/privacy"
+            className="hover:text-red-300 transition duration-300 ml-2"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
             Privacy Policy
           </Link>
         </div>

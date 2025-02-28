@@ -20,7 +20,7 @@ const AppointmentHero = () => {
           >
             <Typewriter
               options={{
-                strings: ["Book an Appointment", "Schedule a Consultation", "Plan Your Visit"],
+                strings: ["Book an Appointment", "Schedule a Meeting", "Plan Your Visit"],
                 autoStart: true,
                 loop: true,
               }}
@@ -48,9 +48,9 @@ const AppointmentHero = () => {
         className="flex justify-center"
       >
         <img
-          src="/booking.png"
+          src="/booking.webp"
           alt="Book an Appointment"
-          className="w-full md:w-[500px] h-auto object-contain"
+          className="w-[75%] md:w-[420px] h-auto object-contain rounded-lg shadow-2xl"
           loading="lazy"
         />
       </motion.div>

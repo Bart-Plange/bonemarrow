@@ -1,4 +1,4 @@
-import { motion, useAnimation, useMotionValue } from "framer-motion";
+import { motion, useMotionValue, useTransform, useAnimation } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -11,26 +11,26 @@ const doctors = [
 const Doctors = () => {
   const [isPaused, setIsPaused] = useState(false);
   const controls = useAnimation();
-  const x = useMotionValue(0); // Tracks `x` position
+  const x = useMotionValue(0);
+  const translateX = useTransform(x, (value) => `${value}px`); // Converts value to px
 
   useEffect(() => {
     const animateScroll = async () => {
-      await controls.start({
-        x: ["0%", "-100%"],
-        transition: {
-          repeat: Infinity,
-          repeatType: "loop",
-          duration: 20,
-          ease: "linear",
-        },
-      });
+      if (!isPaused) {
+        await controls.start({
+          x: ["0%", "-100%"],
+          transition: {
+            ease: "linear",
+            repeat: Infinity,
+            duration: 20,
+          },
+        });
+      } else {
+        controls.stop(); // Pause animation without resetting
+      }
     };
 
-    if (!isPaused) {
-      animateScroll();
-    } else {
-      controls.stop(); // Pause animation (keeps `x` value)
-    }
+    animateScroll();
   }, [isPaused, controls]);
 
   return (
@@ -57,7 +57,7 @@ const Doctors = () => {
         >
           <motion.div
             className="flex space-x-8 w-max"
-            style={{ x }}
+            style={{ x: translateX }} // Use motion value
             animate={controls}
           >
             {[...doctors, ...doctors].map((doctor, index) => (

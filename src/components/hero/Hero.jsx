@@ -2,14 +2,13 @@ import { motion } from "framer-motion";
 import { FaCalendarCheck } from "react-icons/fa";
 import { HeartPulse, Eye, ShieldCheck } from "lucide-react";
 import Typewriter from "typewriter-effect";
+import { Link } from "react-router-dom"; // ✅ React Router for navigation
 
 const Hero = () => {
   return (
     <div className="relative overflow-hidden bg-gradient-to-b from-gray-50 to-gray-100">
-
       {/* Hero Section */}
       <section className="relative flex flex-col md:flex-row items-center justify-between h-auto md:h-screen px-6 md:px-12 z-10 py-16 md:py-0">
-        
         {/* Hero Text */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -17,7 +16,8 @@ const Hero = () => {
           transition={{ duration: 1 }}
           className="text-center md:text-left p-6 md:p-10 flex-1 space-y-6"
         >
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight bg-gradient-to-r from-red-700 to-red-500 text-transparent bg-clip-text mt-8 md:mt-0">
+          {/* ✅ H2: Changing Typewriter Effect (Descriptive but Secondary) */}
+          <h2 className="text-3xl md:text-5xl font-bold leading-tight bg-gradient-to-r from-red-700 to-red-500 text-transparent bg-clip-text mt-4">
             <Typewriter
               options={{
                 strings: ["The Best", "Specialized", "Your Expert"],
@@ -27,30 +27,29 @@ const Hero = () => {
                 deleteSpeed: 30,
               }}
             />
-          </h1>
-          <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 text-transparent bg-clip-text">
-            Bone Marrow Care
           </h2>
+          {/* ✅ H1: Primary SEO Title */}
+          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-gray-950 to-gray-700 text-transparent bg-clip-text">
+            BMT Stem Cell Therapy
+          </h1>
+
+
           <p className="mt-4 text-lg text-gray-700 max-w-xl">
             Providing life-saving treatments with cutting-edge technology and personalized patient care.
           </p>
+
+          {/* CTA Button */}
           <div className="mt-6 flex justify-center md:justify-start space-x-4">
-            <a
-              href="/appointment"
+            <Link
+              to="/appointment"
               className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-8 py-3 rounded-lg shadow-lg text-lg font-medium transition duration-300 transform hover:scale-105"
             >
               Book an Appointment
-            </a>
-            <a
-              href="#about"
-              className="bg-white text-gray-900 px-8 py-3 rounded-lg shadow-lg text-lg font-medium border border-gray-200 hover:bg-gray-50 transition duration-300 transform hover:scale-105"
-            >
-              Learn More
-            </a>
+            </Link>
           </div>
         </motion.div>
 
-        {/* Image (Closer to Text, Aligned on Right for Desktop, Below for Mobile) */}
+        {/* Image */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -58,24 +57,28 @@ const Hero = () => {
           className="flex justify-center flex-1 md:ml-6 mt-8 md:mt-0"
         >
           <img
-            src="/nhn.png" 
-            alt="Bone Marrow Care"
+            src="/nhn.webp"
+            alt="BMT Stem Cell Therapy"
             className="w-[75%] md:w-[420px] h-auto object-contain rounded-lg shadow-2xl"
           />
         </motion.div>
       </section>
 
       {/* Floating "Book Now" Button */}
-      <motion.a
-        href="/appointment"
-        className="fixed z-50 bottom-32 right-6 bg-red-600 text-white p-4 rounded-full shadow-lg hover:bg-red-700 transition-all duration-300 flex items-center justify-center"
+      <motion.div
+        className="fixed z-50 bottom-32 right-6"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         whileHover={{ scale: 1.1, y: -3 }}
         title="Book Now"
       >
-        <FaCalendarCheck size={22} />
-      </motion.a>
+        <Link
+          to="/appointment"
+          className="bg-red-600 text-white p-4 rounded-full shadow-lg hover:bg-red-700 transition-all duration-300 flex items-center justify-center"
+        >
+          <FaCalendarCheck size={22} />
+        </Link>
+      </motion.div>
 
       {/* Overlapping Cards */}
       <div className="relative px-6 md:px-12 mb-16 mt-10 z-10">

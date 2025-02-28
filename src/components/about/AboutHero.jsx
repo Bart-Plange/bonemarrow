@@ -14,7 +14,7 @@ const AboutHero = () => {
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
-          className="text-center md:text-left bg-white bg-opacity-95 p-8 rounded-xl shadow-lg max-w-3xl mx-auto md:ml-0"
+          className="text-center md:text-left p-8 max-w-3xl mx-auto md:ml-0"
         >
           <h1 className="text-4xl md:text-5xl font-bold leading-tight bg-gradient-to-r from-red-700 to-red-500 text-transparent bg-clip-text">
             <Typewriter
@@ -22,6 +22,8 @@ const AboutHero = () => {
                 strings: ["Who We Are", "Our Mission", "About Us"],
                 autoStart: true,
                 loop: true,
+                delay: 50,
+                deleteSpeed: 30,
               }}
             />
           </h1>
@@ -47,7 +49,7 @@ const AboutHero = () => {
           id="about"
         >
           <img
-            src="/ab.png" // Replace with your image path
+            src="/ab.webp" 
             alt="About Us"
             className="w-full max-w-[400px] h-auto object-contain rounded-lg shadow-lg"
           />

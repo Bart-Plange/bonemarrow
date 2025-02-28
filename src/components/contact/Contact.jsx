@@ -144,7 +144,7 @@ const Contact = () => {
           <iframe
             title="Google Map"
             className="w-full h-80 rounded-lg shadow-lg"
-            src="https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=123+Health+St,New+York,NY"
+            src="https://www.google.com/maps/embed/v1/123+Health+St,New+York,NY"
             allowFullScreen
           ></iframe>
         </div>

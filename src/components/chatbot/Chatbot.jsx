@@ -26,7 +26,7 @@ const Chatbot = () => {
 
     try {
         const response = await axios.post(`${backendUrl}/api/chatbot/query`, {
-            userId: "65a1b9d2e4b0e78a2f3c8a9f",  // 🔹 Ensure userId is included
+            userId: "65a1b9d2e4b0e78a2f3c8a9f", // Unique user ID
             userMessage,
         });
 

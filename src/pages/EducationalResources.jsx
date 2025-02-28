@@ -18,8 +18,7 @@ const articles = [
     title: "Understanding Bone Marrow Transplants",
     description:
       "An in-depth look at the process and benefits of bone marrow transplants.",
-    content:
-      `Introduction
+    content: `Introduction
 Bone marrow transplants are a critical medical intervention designed to treat patients with life-threatening blood disorders such as leukemia, lymphoma, and aplastic anemia. By replacing damaged or diseased bone marrow with healthy cells, these transplants offer patients a renewed chance at life. This article provides a thorough exploration of what bone marrow transplants are, why they are needed, the step-by-step process involved, and the benefits and challenges associated with the procedure.
 
 What Is a Bone Marrow Transplant?
@@ -62,8 +61,7 @@ Understanding bone marrow transplants helps patients and families make informed 
     title: "Life After a Bone Marrow Transplant",
     description:
       "What to expect and how to manage your health post-transplant.",
-    content:
-      `Introduction
+    content: `Introduction
 Undergoing a bone marrow transplant is a life-changing experience that offers new hope for patients battling life-threatening blood disorders such as leukemia, lymphoma, and aplastic anemia. While the transplant itself is a major medical procedure, the journey of recovery and adjustment afterwards is equally important. Life after a bone marrow transplant is a gradual process that involves medical monitoring, lifestyle adjustments, and emotional support. This guide provides an in-depth look at what you can expect during the recovery period, strategies to manage your health, and tips to help you embrace a new chapter in your life.
 
 The Recovery Timeline
@@ -161,12 +159,12 @@ const EducationalResources = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-red-900 text-white text-center py-20 px-6 md:px-12">
+      <section className="relative bg-gradient-to-r from-red-800 to-red-900 text-white text-center py-24 px-6 md:px-12">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-5xl md:text-6xl font-bold mt-10"
+          className="text-5xl md:text-6xl font-bold mb-4"
         >
           Educational Resources
         </motion.h1>
@@ -176,7 +174,7 @@ const EducationalResources = () => {
       </section>
 
       {/* Articles Section */}
-      <section className="py-16 px-6 md:px-12">
+      <section className="py-16 px-6 md:px-12 bg-gray-50">
         <h2 className="text-4xl font-bold text-center text-red-900 mb-8">Latest Articles</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {articles.map((article, index) => (

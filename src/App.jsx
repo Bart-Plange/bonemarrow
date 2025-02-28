@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import {Home, NotFound, ChatDashboard, Appointment, AdminDashboard, AboutPage, Dashboard } from "./pages";
-import {Navbar, Footer, Service, Contact, Chatbot, Terms, PrivacyPolicy, ProtectedRoute, BubbleEffect} from "./components";
-import EducationalResources from "./pages/EducationalResources";
+import {Home, NotFound, ChatDashboard, Appointment, AdminDashboard, AboutPage, Dashboard, EducationalResources } from "./pages";
+import {Navbar, Footer, Service, Contact, Chatbot, Terms, PrivacyPolicy, ProtectedRoute, BubbleEffect, ScrollToTop} from "./components"
 import ThemeToggle from "./components/ThemeToggle";
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Navbar />
       <BubbleEffect />
       <Routes>

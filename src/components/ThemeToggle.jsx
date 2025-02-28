@@ -49,7 +49,13 @@ const ThemeToggle = ({ user }) => {
 
             {/* Dark Mode Toggle */}
             <button
-              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+              onClick={() => {
+                const newTheme = theme === "light" ? "dark" : "light";
+                setTheme(newTheme);
+                axios.put("/api/users/settings", { theme: newTheme }, { 
+                  headers: { Authorization: `Bearer ${user.token}` } 
+                });
+              }}
               className="flex items-center justify-between w-full px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition"
             >
               {theme === "light" ? t("Dark Mode") : t("Light Mode")}
@@ -63,7 +69,12 @@ const ThemeToggle = ({ user }) => {
                 {["small", "medium", "large"].map((size) => (
                   <button
                     key={size}
-                    onClick={() => changeFontSize(size)}
+                    onClick={() => {
+                      changeFontSize(size);
+                      axios.put("/api/users/settings", { fontSize: size }, { 
+                        headers: { Authorization: `Bearer ${user.token}` } 
+                      });
+                    }}
                     className={`px-3 py-1 rounded-md text-sm ${
                       fontSize === size ? "bg-blue-600 text-white" : "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
                     }`}
@@ -79,7 +90,12 @@ const ThemeToggle = ({ user }) => {
               <label className="text-gray-900 dark:text-gray-100 block font-semibold">{t("Language")}</label>
               <select
                 value={language}
-                onChange={(e) => changeLanguage(e.target.value)}
+                onChange={(e) => {
+                  changeLanguage(e.target.value);
+                  axios.put("/api/users/settings", { language: e.target.value }, { 
+                    headers: { Authorization: `Bearer ${user.token}` } 
+                  });
+                }}
                 className="w-full mt-1 p-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
               >
                 <option value="en">{t("English")}</option>

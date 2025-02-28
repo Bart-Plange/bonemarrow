@@ -47,7 +47,7 @@ const Navbar = () => {
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
         <Link to="/" className="text-2xl font-bold flex items-center text-red-700">
-          <img src="/logo.jpeg" alt="logo" className="w-12"/>
+          <img src="/logo.webp" alt="logo" className="w-12"/>
           <p className="ml-2">BMT Ghana Stem Cells Unit</p>
         </Link>
 
